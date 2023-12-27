@@ -52,113 +52,113 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
 
 
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   checkForUpdate();
-  //   setState(() {
-  //     unseen = 0;
-  //   });
-  //
-  //   FirebaseMessaging.instance.getInitialMessage().then(
-  //         (message) {
-  //       print("FirebaseMessaging.instance.getInitialMessage");
-  //       if (message != null) {
-  //         print("New Notification");
-  //         if (message.data['id'] != null) {
-  //
-  //             if(message.data['notification_type']==notificationTypes[0]){
-  //               Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //             }
-  //             else if(message.data['notification_type']==notificationTypes[1]||message.data['notification_type']==notificationTypes[4]){
-  //               Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //             }
-  //             else if(message.data['notification_type']==notificationTypes[5]){
-  //               Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //             }
-  //             else if(message.data['notification_type']==notificationTypes[8]){
-  //               Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //             }
-  //             else if(message.data['notification_type']==notificationTypes[10]){
-  //               Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //             }
-  //             else{
-  //               Get.to(NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //             }
-  //
-  //
-  //         }
-  //         LocalNotificationService.createanddisplaynotification(message);
-  //       }
-  //     },
-  //   );
-  //
-  //   // 2. This method only call when App in foreground it mean app must be opened
-  //   FirebaseMessaging.onMessage.listen(
-  //         (message) {
-  //       print("FirebaseMessaging.onMessage.listen");
-  //       if (message.notification != null) {
-  //         print(message.notification!.title);
-  //         print(message.notification!.body);
-  //         print("message.data11 ${message.data}");
-  //         LocalNotificationService.createanddisplaynotification(message);
-  //         // if(message.data['notification_type']==notificationTypes[0]){
-  //         //   Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //         // }
-  //         // else if(message.data['notification_type']==notificationTypes[1]||message.data['notification_type']==notificationTypes[4]){
-  //         //   Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //         // }
-  //         // else if(message.data['notification_type']==notificationTypes[5]){
-  //         //   Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //         // }
-  //         // else if(message.data['notification_type']==notificationTypes[8]){
-  //         //   Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //         // }
-  //         // else if(message.data['notification_type']==notificationTypes[10]){
-  //         //   Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //         // }
-  //         // else{
-  //         //   Get.to(NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //         // }
-  //
-  //       }
-  //     },
-  //   );
-  //
-  //   // 3. This method only call when App in background and not terminated(not closed)
-  //   FirebaseMessaging.onMessageOpenedApp.listen(
-  //         (message) {
-  //       print("FirebaseMessaging.onMessageOpenedApp.listen");
-  //       if (message.notification != null) {
-  //         print(message.notification!.title);
-  //         print(message.notification!.body);
-  //         print("message.data22 ${message.data['_id']}");
-  //         LocalNotificationService.createanddisplaynotification(message);
-  //         if(message.data['notification_type']==notificationTypes[0]){
-  //           Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //         }
-  //         else if(message.data['notification_type']==notificationTypes[1]||message.data['notification_type']==notificationTypes[4]){
-  //           Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //         }
-  //         else if(message.data['notification_type']==notificationTypes[5]){
-  //           Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //         }
-  //         else if(message.data['notification_type']==notificationTypes[8]){
-  //           Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //         }
-  //         else if(message.data['notification_type']==notificationTypes[10]){
-  //           Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //         }
-  //         else{
-  //           Get.to(NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
-  //         }
-  //       }
-  //     },
-  //   );
-  //
-  //   getToken();
-  //
-  // }
+  @override
+  void initState() {
+    super.initState();
+    //checkForUpdate();
+    setState(() {
+      unseen = 0;
+    });
+
+    FirebaseMessaging.instance.getInitialMessage().then(
+          (message) {
+        print("FirebaseMessaging.instance.getInitialMessage");
+        if (message != null) {
+          print("New Notification");
+          if (message.data['id'] != null) {
+
+              if(message.data['notification_type']==notificationTypes[0]){
+                Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+              }
+              else if(message.data['notification_type']==notificationTypes[1]||message.data['notification_type']==notificationTypes[4]){
+                Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+              }
+              else if(message.data['notification_type']==notificationTypes[5]){
+                Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+              }
+              else if(message.data['notification_type']==notificationTypes[8]){
+                Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+              }
+              else if(message.data['notification_type']==notificationTypes[10]){
+                Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+              }
+              else{
+                Get.to(NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+              }
+
+
+          }
+          LocalNotificationService.createanddisplaynotification(message);
+        }
+      },
+    );
+
+    // 2. This method only call when App in foreground it mean app must be opened
+    FirebaseMessaging.onMessage.listen(
+          (message) {
+        print("FirebaseMessaging.onMessage.listen");
+        if (message.notification != null) {
+          print(message.notification!.title);
+          print(message.notification!.body);
+          print("message.data11 ${message.data}");
+          LocalNotificationService.createanddisplaynotification(message);
+          if(message.data['notification_type']==notificationTypes[0]){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+          else if(message.data['notification_type']==notificationTypes[1]||message.data['notification_type']==notificationTypes[4]){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+          else if(message.data['notification_type']==notificationTypes[5]){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+          else if(message.data['notification_type']==notificationTypes[8]){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+          else if(message.data['notification_type']==notificationTypes[10]){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+          else{
+            Get.to(NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+
+        }
+      },
+    );
+
+    // 3. This method only call when App in background and not terminated(not closed)
+    FirebaseMessaging.onMessageOpenedApp.listen(
+          (message) {
+        print("FirebaseMessaging.onMessageOpenedApp.listen");
+        if (message.notification != null) {
+          print(message.notification!.title);
+          print(message.notification!.body);
+          print("message.data22 ${message.data['_id']}");
+          LocalNotificationService.createanddisplaynotification(message);
+          if(message.data['notification_type']==notificationTypes[0]){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+          else if(message.data['notification_type']==notificationTypes[1]||message.data['notification_type']==notificationTypes[4]){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+          else if(message.data['notification_type']==notificationTypes[5]){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+          else if(message.data['notification_type']==notificationTypes[8]){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+          else if(message.data['notification_type']==notificationTypes[10]){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+          else{
+            Get.to(NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+        }
+      },
+    );
+
+    getToken();
+
+  }
 
 
   Future<void> getToken()async{
@@ -169,32 +169,32 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
     // print('notification token : $response');
   }
 
-  Future<void> checkForUpdate() async {
-    InAppUpdate.checkForUpdate().then((info) {
-      setState(() {
-        _updateInfo = info;
-      });
-      if(_updateInfo?.updateAvailability ==
-          UpdateAvailability.updateAvailable){
-        updateDialog();
-      }
-      else{
-        SnackShow.showSuccess(context, 'App is up to date');
-      }
-    }).catchError((e) {
-      SnackShow.showFailure(context, 'App is up to date');
-    });
-  }
-
-  void updateDialog() async {
-    InAppUpdate.startFlexibleUpdate().then((_) {
-      setState(() {
-        _flexibleUpdateAvailable = true;
-      });
-    }).catchError((e) {
-      SnackShow.showFailure(context, '${e.toString()}');
-    });
-  }
+  // Future<void> checkForUpdate() async {
+  //   InAppUpdate.checkForUpdate().then((info) {
+  //     setState(() {
+  //       _updateInfo = info;
+  //     });
+  //     if(_updateInfo?.updateAvailability ==
+  //         UpdateAvailability.updateAvailable){
+  //       updateDialog();
+  //     }
+  //     else{
+  //       SnackShow.showSuccess(context, 'App is up to date');
+  //     }
+  //   }).catchError((e) {
+  //     SnackShow.showFailure(context, 'App is up to date');
+  //   });
+  // }
+  //
+  // void updateDialog() async {
+  //   InAppUpdate.startFlexibleUpdate().then((_) {
+  //     setState(() {
+  //       _flexibleUpdateAvailable = true;
+  //     });
+  //   }).catchError((e) {
+  //     SnackShow.showFailure(context, '${e.toString()}');
+  //   });
+  // }
 
 
   @override
@@ -261,7 +261,7 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
                 children: [
 
                   Container(
-                    height: 220.h,
+                    height: 200.h,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         color: bgColor,
@@ -273,7 +273,7 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
                             data: (data){
                               final info = data.firstWhere((element) => element.email == auth.user.userInfo.email);
                               print('info id : ${info.id}');
-                              final tracker = ref.watch(studentBusProvider(info.id));
+                             final tracker = ref.watch(studentBusProvider(info.id));
                               return  Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -353,8 +353,7 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
                                                         ),
                                                         child: Center(
                                                           child: Text(
-                                                            '',
-                                                            // '${unseen}',
+                                                            "$unseen",
                                                             style: TextStyle(
                                                               color: Colors.white,
                                                               fontSize: 10.sp,
@@ -377,17 +376,22 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
                                                         // Get.to(()=>TrackerPage());
                                                         Get.to(()=>BusLocationPage(id: bus_id.first.bus,));
                                                       },
-                                                      icon: Icon(Icons.pin_drop));
+                                                      icon: Icon(Icons.pin_drop, color: Colors.white,)
+                                                  );
                                                 },
-                                                loading: ()=>Icon(Icons.pin_drop),
+                                                loading: ()=>Icon(Icons.pin_drop, color: Colors.white,),
                                                 error: (err,stack) => Icon(Icons.error,color: Colors.red)
                                             );
                                           },
-                                          loading: ()=>Icon(Icons.pin_drop),
+                                          loading: ()=>IconButton(
+                                              onPressed: (){
+                                                // Get.to(()=>TrackerPage());
+                                              },
+                                              icon: Icon(Icons.pin_drop, color: Colors.white,)),
                                           error: (err,stack) {
                                             return IconButton(
                                                 onPressed: (){
-                                                  SnackShow.showFailure(context, 'No bus assigned.');
+                                                  SnackShow.showFailure(context, err.toString());
                                                 },
                                                 icon: Icon(Icons.pin_drop, color: Colors.white,));
                                           }
@@ -593,7 +597,7 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
                               padding: EdgeInsets.zero,
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: allNotice.length,
+                              itemCount: allNotice.length == 0 ? 0 : 1,
                               itemBuilder: (context, index) {
                                 return NoticeCard3(
                                     title: allNotice[index].title,

@@ -2,7 +2,6 @@
 class Api {
 
 
-
   static const baseUrl = 'http://116.203.219.132:8080/api';
   static const basePicUrl = 'http://116.203.219.132:8080';
 
@@ -151,6 +150,7 @@ class Api {
 
 
   static const studentBusRouteUrl ='$baseUrl/student_bus_route/all/?student=';
+  static const studentBusRouteUrlUPDATED ='$baseUrl/student_bus_route/all/';
   static const busLocationUrl ='$baseUrl/bus_location/all/?bus=';
 
 

@@ -1,8 +1,11 @@
 
+import 'package:device_preview/device_preview.dart';
 import 'package:eschool/authentication/login_pages/status_page.dart';
+import 'package:eschool/firebase_options.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +16,6 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import 'firebase_option.dart';
 
 
 
@@ -83,23 +85,37 @@ void main() async {
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
     // TODO: implement build
     return ScreenUtilInit(
-        designSize: const Size(392, 850),
+        designSize:  Size(width, height),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
+            useInheritedMediaQuery: true,
+            locale: DevicePreview.locale(context),
             theme: ThemeData(
+              appBarTheme: AppBarTheme(
+                iconTheme: IconThemeData(
+                  color: Colors.white
+                )
+              ),
               useMaterial3: true
             ),
             debugShowCheckedModeBanner: false,
             home: child,
             builder: (BuildContext context, Widget? child) {
+              DevicePreview.appBuilder;
               final MediaQueryData data = MediaQuery.of(context);
               return MediaQuery(
                 data: data.copyWith(textScaler: TextScaler.linear(0.9)),

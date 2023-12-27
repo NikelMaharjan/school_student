@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:lottie/lottie.dart' as Lot;
 
 import '../../model/bus_model.dart';
 
@@ -127,9 +128,7 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
       );
       final List<dynamic> data = response.data['navigation']['data'];
 
-      final List<BusLocation> busLocations = data
-          .map((json) => BusLocation.fromJson(json))
-          .toList();
+      final List<BusLocation> busLocations = data.map((json) => BusLocation.fromJson(json)).toList();
 
       _streamController.add(busLocations);
 
@@ -140,7 +139,6 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
                 infoWindow: InfoWindow(title: 'Bus'),
                 markerId: MarkerId('Bus'),
                 position: LatLng(busPosition?.latitude??0, busPosition?.longitude??0) ,
-                icon: _busIcon
             )
         );
       });
@@ -158,7 +156,7 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
       backgroundColor:Colors.white,
       appBar: AppBar(
         backgroundColor: primary,
-        title: Text('Bus Locations'),
+        title: Text('Bus Locations', style: TextStyle(color: Colors.white),),
       ),
       body: StreamBuilder<List<BusLocation>>(
 
@@ -206,7 +204,7 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
                     ),
                       onPressed: (){
                         _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-                            zoom: 15,
+                            zoom: 70,
                             target: busPosition??LatLng(0.0, 0.0))));
 
                       },
@@ -222,7 +220,7 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
             );
           }
 
-          return Center(child: CircularProgressIndicator());
+          return Center(child: Lot.Lottie.asset('assets/jsons/map.json'));
         },
       ),
     );

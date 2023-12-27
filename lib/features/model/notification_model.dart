@@ -5,7 +5,6 @@ class NotificationModel {
   String notificationType;
   int objectId;
   bool seen;
-  int notification_token;
 
   NotificationModel({
     required this.id,
@@ -14,7 +13,6 @@ class NotificationModel {
     required this.notificationType,
     required this.objectId,
     required this.seen,
-    required this.notification_token,
   });
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) {
@@ -25,7 +23,6 @@ class NotificationModel {
       notificationType: json['notification_type'],
       objectId: json['object_id'],
       seen: json['seen'],
-      notification_token: json['notification_token'],
     );
   }
 

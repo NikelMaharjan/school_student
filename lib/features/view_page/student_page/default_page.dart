@@ -74,11 +74,12 @@ class _DefaultPageState extends State<DefaultPage> with TickerProviderStateMixin
                             canvasColor: Colors.white
                         ),
                         child: BottomNavigationBar(
+
                             backgroundColor: Colors.white,
                             selectedItemColor: pre_color,
-                            unselectedItemColor: Colors.white,
+                            unselectedItemColor: Colors.grey,
                             showSelectedLabels: true,
-                            showUnselectedLabels: false,
+                            showUnselectedLabels: true,
                             onTap:(int index){
                               if(index == 2) {
                                 showModalBottomSheet<void>(
@@ -105,17 +106,19 @@ class _DefaultPageState extends State<DefaultPage> with TickerProviderStateMixin
                             },
                             currentIndex: _index,
                             items:[
+
                               BottomNavigationBarItem(icon: DecoratedIcon(
                                 icon: Icon(EvaIcons.home,size: 27.sp,),
                                 decoration: IconDecoration(border: IconBorder(
-                                    width: 1.w
+                                    width: 0.1.w
                                 )),
                               ),label:'Home'),
-                              BottomNavigationBarItem(icon: DecoratedIcon(
+                              BottomNavigationBarItem(
+                                icon: DecoratedIcon(
                                 icon: Icon(EvaIcons.book,size: 27.sp,),
                                 decoration: IconDecoration(border: IconBorder(
                                     width: 1.w
-                                )),),label:'Subjects'),
+                                )),),label:'Subjects',),
                               BottomNavigationBarItem(icon: DecoratedIcon(
                                 icon: Icon(EvaIcons.menu,size: 27.sp,),
                                 decoration: IconDecoration(border: IconBorder(

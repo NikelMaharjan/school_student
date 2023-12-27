@@ -97,14 +97,15 @@ class _ClassNoticeBoardState extends ConsumerState<NotificationPage>
                           return NotificationCard(
                             title: data[index].title,
                             description: data[index].body,
-                            color: data[index].seen == true? Colors.white : Colors.grey.withOpacity(0.2),
+                            color: data[index].seen == true? Colors.white : Colors.red.withOpacity(0.2),
                             onTap: (){
 
 
                               ref.read(notificationUpdater.notifier).updateSeen(
                                 id: data[index].id,
                                 token: auth.user.token,
-                              ).then((value) => ref.refresh(notificationProvider2(widget.notification_token))).then((value) => print('Successful'));
+                              ).then((value) => ref.refresh(notificationProvider2(widget.notification_token)))
+                                  .then((value) => print('Successful'));
 
 
                               if(types==notificationTypes[0]){

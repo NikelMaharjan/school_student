@@ -125,7 +125,7 @@ class _MenuPageState extends ConsumerState<MenuPage> {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       childAspectRatio: (MediaQuery.of(context).size.width) /
-                          (MediaQuery.of(context).size.height / 2.2),
+                          (MediaQuery.of(context).size.height / 2.0),
                     ),
                     children: [
                       GridTileButton(
