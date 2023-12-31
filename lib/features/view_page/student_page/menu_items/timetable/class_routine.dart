@@ -14,7 +14,7 @@ class ClassRoutine extends ConsumerWidget {
 
   final int class_section_id;
   final String day;
-  ClassRoutine({required this.class_section_id,required this.day});
+  ClassRoutine({super.key, required this.class_section_id,required this.day});
 
   @override
   Widget build(BuildContext context,ref) {
@@ -26,11 +26,11 @@ class ClassRoutine extends ConsumerWidget {
     return routine.when(
       data: (data){
         final routineInfo = data.where((element) => element.day==day).toList();
-        return routineInfo.isEmpty ? Center(child: Text("No Time Table at the moment"),) : ListView.builder(
+        return routineInfo.isEmpty ? const Center(child: Text("No Time Table at the moment"),) : ListView.builder(
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           itemCount: routineInfo.length,
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           itemBuilder: (context, index) {
 
 
@@ -41,7 +41,7 @@ class ClassRoutine extends ConsumerWidget {
 
 
             return CustomCardWidget(
-                subjectName:  '${routineInfo[index].classSubject.subject.subjectName}' ,
+                subjectName:  routineInfo[index].classSubject.subject.subjectName ,
                 time: "${timeFormat.format(DateFormat('HH:mm').parse(routineInfo[index].startTime))}-${timeFormat.format(DateFormat('HH:mm').parse(routineInfo[index].endTime))}",
             );
 
@@ -56,7 +56,7 @@ class ClassRoutine extends ConsumerWidget {
 
       },
       error: (err, stack) => Center(child: Text('$err')),
-      loading: () => NoticeShimmer(),
+      loading: () => const NoticeShimmer(),
     );
   }
 }

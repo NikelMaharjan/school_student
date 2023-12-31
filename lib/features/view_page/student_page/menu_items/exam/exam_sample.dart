@@ -11,7 +11,7 @@ class Exams extends ConsumerWidget {
 
   final int class_id;
   final String day;
-  Exams({required this.class_id,required this.day});
+  Exams({super.key, required this.class_id,required this.day});
 
   @override
   Widget build(BuildContext context,ref) {
@@ -37,7 +37,7 @@ class Exams extends ConsumerWidget {
               shrinkWrap: true,
               padding: EdgeInsets.zero,
               itemCount: routineInfo.length,
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 final subjectName = subject_data.firstWhere((element) => element.id == routineInfo[index].subject.id);
                 // Define the date format to show only the hour and minute
@@ -45,10 +45,10 @@ class Exams extends ConsumerWidget {
 
                 return CommonCard(
                   time:
-                  "${routineInfo.map((e) => '${timeFormat.format(DateFormat('HH:mm').parse(e.startTime))}-${timeFormat.format(DateFormat('HH:mm').parse(e.endTime))}').join(', ')}",
-                  className: '${routineInfo.map((e) => e.date).join(', ')}',
+                  routineInfo.map((e) => '${timeFormat.format(DateFormat('HH:mm').parse(e.startTime))}-${timeFormat.format(DateFormat('HH:mm').parse(e.endTime))}').join(', '),
+                  className: routineInfo.map((e) => e.date).join(', '),
                   subjectName:
-                  "${subjectName.subjectName}",
+                  subjectName.subjectName,
                 );
               },
             );
@@ -61,11 +61,11 @@ class Exams extends ConsumerWidget {
 
           },
           error: (err, stack) => Center(child: Text('$err')),
-          loading: () => NoticeShimmer(),
+          loading: () => const NoticeShimmer(),
         );
       },
       error: (err, stack) => Center(child: Text('$err')),
-      loading: () => NoticeShimmer(),
+      loading: () => const NoticeShimmer(),
     );
 
 

@@ -1,7 +1,6 @@
 
 
 
-import 'dart:convert';
 
 import 'package:eschool/authentication/providers/auth_provider.dart';
 import 'package:eschool/constants/colors.dart';
@@ -10,7 +9,6 @@ import 'package:eschool/utils/commonWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 
 import '../../../services/feature_services.dart';
@@ -18,7 +16,7 @@ import '../../../services/student_services.dart';
 import 'assignments.dart';
 
 class AssignmentTabs extends ConsumerStatefulWidget {
-  const AssignmentTabs({Key? key}) : super(key: key);
+  const  AssignmentTabs({super.key});
 
   @override
   ConsumerState<AssignmentTabs> createState() => _AssignmentTabsState();
@@ -113,14 +111,14 @@ class _AssignmentTabsState extends ConsumerState<AssignmentTabs> with TickerProv
 
               },
               error:  (err, stack) => Center(child: Text('$err')),
-              loading: () => Container(child: Center(child: ShimmerListTile2()))
+              loading: () => const Center(child: ShimmerListTile2())
           );
 
 
 
           },
         error:  (err, stack) => Center(child: Text('$err')),
-        loading: () => Container(child: Center(child: ShimmerListTile2()))
+        loading: () => const Center(child: ShimmerListTile2())
     );
 
 

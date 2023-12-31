@@ -12,13 +12,8 @@ import 'package:get/get.dart';
 
 import '../../../api/api.dart';
 import '../../../utils/commonWidgets.dart';
-import '../student_page/menu_items/attendance/attendance_page.dart';
-import '../student_page/menu_items/exam/exam_page.dart';
-import '../student_page/menu_items/result/result_page.dart';
-import '../student_page/menu_items/school_calender.dart';
-import '../student_page/menu_items/timetable/timetable_page.dart';
+
 import '../student_page/subject_tab/subject_page.dart';
-import 'menu_items_parents/assignment_parents/assignment_parents.dart';
 
 class StudentOverview extends ConsumerStatefulWidget {
   final int student_id;
@@ -55,8 +50,7 @@ class _StudentOverviewState extends ConsumerState<StudentOverview> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                               color: primary,
-                              borderRadius:
-                              BorderRadius.vertical(bottom: Radius.circular(20))),
+                              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(20))),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -101,7 +95,7 @@ class _StudentOverviewState extends ConsumerState<StudentOverview> {
                   return  GridView.builder(
                     shrinkWrap: true,
                     itemCount: subject_data.length,
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         childAspectRatio: 2.w / 2.4.h,
                         crossAxisCount: 3,
@@ -128,7 +122,7 @@ class _StudentOverviewState extends ConsumerState<StudentOverview> {
                                 horizontal: 8.w, vertical: 8.h),
                             child: Text(
                               subject_data[index].subject.subjectName,
-                              style: TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.black),
                             ),
                           )
                         ],
@@ -138,7 +132,7 @@ class _StudentOverviewState extends ConsumerState<StudentOverview> {
                   );
                 },
                 error: (err, stack) => Center(child: Text('$err')),
-                loading: () => Center(child: GridShimmer2())),
+                loading: () => const Center(child: GridShimmer2())),
                 ),
 
                         SizedBox(
@@ -174,7 +168,7 @@ class _StudentOverviewState extends ConsumerState<StudentOverview> {
 
               },
               error: (err, stack) => Center(child: Text('$err')),
-              loading: () => Center(child: CircularProgressIndicator())),
+              loading: () => const Center(child: CircularProgressIndicator())),
 
 
           ),

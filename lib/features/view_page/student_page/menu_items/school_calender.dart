@@ -45,7 +45,7 @@ class _CalenderState extends ConsumerState<Calender> {
             Container(
               width: double.infinity,
               height: 200.h,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(40),
                   ),
@@ -137,20 +137,20 @@ class _CalenderState extends ConsumerState<Calender> {
                                   top: 10.h,
                                   bottom: 20.h),
                               titleCentered: true,
-                              titleTextStyle: TextStyle(
+                              titleTextStyle: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
-                              leftChevronIcon: Icon(
+                              leftChevronIcon: const Icon(
                                 Icons.arrow_back_ios,
                                 color: Colors.black,
                               ),
-                              rightChevronIcon: Icon(
+                              rightChevronIcon: const Icon(
                                 Icons.arrow_forward_ios,
                                 color: Colors.black,
                               )),
 
                           calendarStyle: CalendarStyle(
-                            defaultTextStyle: TextStyle(color: Colors.black),
+                            defaultTextStyle: const TextStyle(color: Colors.black),
                             markerSize: 25.sp,
                             markerDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
@@ -168,14 +168,15 @@ class _CalenderState extends ConsumerState<Calender> {
                   SizedBox(height: 10.h),
 
                   eventData.when(
-                      data: (event_data) {
-                        final data = event_data.where((element) => DateTime.parse(element.dateEng).isAfter(DateTime.now())).toList();
+                      data: (eventData) {
+                        final data = eventData.where((element) => DateTime.parse(element.dateEng).isAfter(DateTime.now())).toList();
+                        final dataBefore = eventData.where((element) => DateTime.parse(element.dateEng).isBefore(DateTime.now())).toList();
                         final DateTime now = DateTime.now();
                         final String _formatted =
                         DateFormat('yyyy-MM-dd').format(_selectedDate!);
                         final String _events =
                         DateFormat('yyyy-MM-dd').format(now);
-                        final eventWall = event_data.firstWhereOrNull((element) => element.dateEng == _formatted);
+                        final eventWall = eventData.firstWhereOrNull((element) => element.dateEng == _formatted);
 
                         if (eventWall != null) {
                           final eventDate = DateTime.parse(eventWall.dateEng);
@@ -198,12 +199,12 @@ class _CalenderState extends ConsumerState<Calender> {
                                   builder: (context) {
                                     return AlertDialog(
                                       backgroundColor: Colors.white,
-                                      shape: RoundedRectangleBorder(
+                                      shape: const RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(Radius.circular(12.0))),
                                       title:   DataTable(
                                         columns:  [
 
-                                          DataColumn(
+                                          const DataColumn(
                                             label: Text(
                                               'Date',
                                               style: TextStyle(),
@@ -219,7 +220,7 @@ class _CalenderState extends ConsumerState<Calender> {
                                         rows: [
 
                                           DataRow(cells: [
-                                            DataCell(Text('Title')),
+                                            const DataCell(Text('Title')),
                                             DataCell(Text(eventWall.title)),
                                           ]),
 
@@ -227,18 +228,18 @@ class _CalenderState extends ConsumerState<Calender> {
 
 
                                           DataRow(cells: [
-                                            DataCell(Text('Location')),
+                                            const DataCell(Text('Location')),
                                             DataCell(Text(eventWall.location)),
                                           ]),
 
                                           DataRow(cells: [
-                                            DataCell(Text('Start Time')),
+                                            const DataCell(Text('Start Time')),
                                             DataCell(Text(eventWall.startTime)),
                                           ]),
 
 
                                           DataRow(cells: [
-                                            DataCell(Text('End Time')),
+                                            const DataCell(Text('End Time')),
                                             DataCell(Text(eventWall.endTime)),
                                           ]),
 
@@ -472,7 +473,7 @@ class _CalenderState extends ConsumerState<Calender> {
                                             )),
                                         ListView.builder(
                                             padding: EdgeInsets.zero,
-                                            physics: BouncingScrollPhysics(),
+                                            physics: const BouncingScrollPhysics(),
                                             shrinkWrap: true,
                                             itemCount: data.length,
                                             itemBuilder: (context, index) {
@@ -558,7 +559,7 @@ class _CalenderState extends ConsumerState<Calender> {
                                                   crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                                   children: [
-                                                    Divider(
+                                                    const Divider(
                                                       color: Colors.black,
                                                     ),
                                                     Padding(
@@ -567,7 +568,7 @@ class _CalenderState extends ConsumerState<Calender> {
                                                           horizontal: 12.w),
                                                       child: Text(
                                                         '${1 + index}\. ${data[index].title}',
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             color: Colors.black),
                                                       ),
                                                     ),
@@ -628,40 +629,49 @@ class _CalenderState extends ConsumerState<Calender> {
 
 
 
-                                  SizedBox(height: 10,),
-                                  Text("No Event Today", style: TextStyle(fontSize: 20, letterSpacing: 2),),
+                                  const SizedBox(height: 10,),
+                                  const Text("No Event Today", style: TextStyle(fontSize: 20, letterSpacing: 2),),
 
-                                  SizedBox(height: 30,),
+                                  const SizedBox(height: 30,),
 
 
                                   Container(
                                     width: 360.w,
 
                                     child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
+                                        const Text("Upcoming/Recent Events", style: TextStyle(fontSize: 20, letterSpacing: 2),),
+
                                         ListView.builder(
+
                                             padding: EdgeInsets.zero,
-                                            physics: BouncingScrollPhysics(),
+                                            physics: const BouncingScrollPhysics(),
                                             shrinkWrap: true,
                                             itemCount: data.length,
                                             itemBuilder: (context, index) {
+
+
                                               DateTime dt = DateTime.parse(data[index].dateEng);
                                               var eventDate = DateFormat('yyyy-MM-dd').format(dt);
+
+
+
+
 
                                               return Column(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
 
                                                 children: [
 
-                                                  Text("Upcoming Events", style: TextStyle(fontSize: 20, letterSpacing: 2),),
 
                                                   ListTile(
 
                                                     title: Row(
                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
-                                                        Text(data[index].event_type.name, style: TextStyle(fontWeight: FontWeight.bold),),
-                                                        Text(eventDate, style: TextStyle(fontSize: 14),)
+                                                        Text(data[index].event_type.name, style: const TextStyle(fontWeight: FontWeight.bold),),
+                                                        Text(eventDate, style: const TextStyle(fontSize: 14),)
                                                       ],
                                                     ),
                                                     subtitle: Text(data[index].description),
@@ -688,7 +698,7 @@ class _CalenderState extends ConsumerState<Calender> {
                         }
                       },
                       error: (err, stack) => Center(child: Text('$err')),
-                      loading: () => Center(child: CircularProgressIndicator())),
+                      loading: () => const Center(child: CircularProgressIndicator())),
 
                   // InkWell(
                   //   onTap: () async {
@@ -712,15 +722,6 @@ class _CalenderState extends ConsumerState<Calender> {
                   // )
                 ],
               ),
-            ),
-            Positioned(
-              left: 15.w,
-              top: 40.h,
-              child: IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp)),
             ),
           ],
         ),

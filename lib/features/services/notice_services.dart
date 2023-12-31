@@ -21,7 +21,16 @@ final classNoticeProvider = FutureProvider.family<List<ClassNotice>, int>((ref, 
 });
 
 final subNoticeList = FutureProvider.family(
-    (ref, String token) => SubjectNoticeService(token).getSubjectNotice());
+    (ref, String token) => SubjectNoticeService(token: token).getSubjectNotice());
+
+
+final subNoticeListNotification = FutureProvider.family<List<SubjectNotice>, int>((ref, id) async {
+  final token = ref.watch(authProvider);
+  final classNotice = SubjectNoticeService(token: token.user!.token, id: id);
+  return await classNotice.getSubjectNoticeNotification();
+});
+
+
 
 class NoticeService {
   String token;
@@ -114,7 +123,9 @@ class ClassNoticeService {
 class SubjectNoticeService {
   String token;
 
-  SubjectNoticeService(this.token);
+  int? id;
+
+    SubjectNoticeService({required this.token, this.id});
 
   final dio = Dio();
 
@@ -135,7 +146,7 @@ class SubjectNoticeService {
           options: Options(
               headers: {HttpHeaders.authorizationHeader: 'token $token'}));
       return Right(response.data);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       print(err.response);
       throw Exception('Network error');
     }
@@ -168,6 +179,41 @@ class SubjectNoticeService {
       throw Exception('Unable to fetch data');
     }
   }
+
+
+  Future<List<SubjectNotice>> getSubjectNoticeNotification() async {
+
+
+
+
+    try {
+
+
+      final response = await dio.get("${Api.subNoticeNotification}$id/",
+          options: Options(headers: {HttpHeaders.authorizationHeader: 'token $token'}));
+
+    print("Response os $response");
+
+
+
+
+
+      if(response.statusCode == 204){
+        throw "Nothing at the moment";
+      }
+
+
+
+
+      final data = (response.data['data'] as List).map((e) => SubjectNotice.fromJson(e)).toList();
+
+
+      return data;
+    } on DioException catch (err) {
+      throw Exception('Unable to fetch data');
+    }
+  }
+
 
 
 

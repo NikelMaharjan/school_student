@@ -1,8 +1,6 @@
 
 
-import 'dart:io';
 
-import 'package:eschool/features/providers/assignment_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,9 +10,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../api/api.dart';
 import '../../../../authentication/providers/auth_provider.dart';
 import '../../../../constants/colors.dart';
-import '../../../../constants/snackshow.dart';
 import '../../../../utils/commonWidgets.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../model/assignment_model.dart';
 import '../../../services/assignment_services.dart';
@@ -23,7 +19,7 @@ class AssignmentStatus extends ConsumerStatefulWidget {
 
   final Assignment assignment;
   final int student_id;
-  AssignmentStatus({required this.assignment,required this.student_id});
+  const AssignmentStatus({super.key, required this.assignment,required this.student_id});
 
   @override
   ConsumerState<AssignmentStatus> createState() => _AssignmentStatusState();
@@ -40,8 +36,8 @@ class _AssignmentStatusState extends ConsumerState<AssignmentStatus> {
     final auth = ref.watch(authProvider);
     final studentAssignment = ref.watch(studentAssignmentProvider(auth.user.token));
     final assignmentStatus = ref.watch(assignmentStatusList(auth.user.token));
-    print('assignment id ${widget.assignment.id}');
-    print('student id ${widget.student_id}');
+   // print('assignment id ${widget.assignment.id}');
+   // print('student id ${widget.student_id}');
 
 
 
@@ -76,17 +72,17 @@ class _AssignmentStatusState extends ConsumerState<AssignmentStatus> {
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: studentAssignment.when(
                 data: (data){
-                  final stud_data = data.firstWhereOrNull((element) => element.assignment.id == widget.assignment.id&& element.student.id == widget.student_id);
-                  if(stud_data != null ){
-                    final url = Uri.parse('${Api.basePicUrl}${stud_data.studentAssignment.path}');
+                  final studData = data.firstWhereOrNull((element) => element.assignment.id == widget.assignment.id&& element.student.id == widget.student_id);
+                  if(studData != null ){
+                    final url = Uri.parse('${Api.basePicUrl}${studData.studentAssignment.path}');
 
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
 
                         assignmentStatus.when(
-                            data: (status_data){
-                              final status = status_data.firstWhereOrNull((element) => element.studentAssignment.id == stud_data.id);
+                            data: (statusData){
+                              final status = statusData.firstWhereOrNull((element) => element.studentAssignment.id == studData.id);
 
                               if(status == null){
                                 return Container(
@@ -98,7 +94,7 @@ class _AssignmentStatusState extends ConsumerState<AssignmentStatus> {
                                             color: Colors.black
                                         )
                                     ),
-                                    child: ListTile(
+                                    child: const ListTile(
                                         title: Text('Status',style: TextStyle(color: Colors.black),),
                                         trailing:Text('Pending',style: TextStyle(color: Colors.grey),)
                                     )
@@ -119,8 +115,8 @@ class _AssignmentStatusState extends ConsumerState<AssignmentStatus> {
                                             )
                                         ),
                                         child: ListTile(
-                                            title: Text('Status',style: TextStyle(color: Colors.white),),
-                                            trailing:Text(status.status,style: TextStyle(color: Colors.white),)
+                                            title: const Text('Status',style: TextStyle(color: Colors.white),),
+                                            trailing:Text(status.status,style: const TextStyle(color: Colors.white),)
                                         )
                                     ),
                                     NoticeCard(
@@ -143,15 +139,15 @@ class _AssignmentStatusState extends ConsumerState<AssignmentStatus> {
                                         color: Colors.black
                                     )
                                 ),
-                                child: ListTile(
+                                child: const ListTile(
                                     title: Text('Status',style: TextStyle(color: Colors.black),),
                                     trailing:Text('Pending',style: TextStyle(color: Colors.grey),)
                                 )
                             ),
                             loading: () =>
-                                Container(
+                                SizedBox(
                                     height:100.h,
-                                    child: ShimmerListTile3())
+                                    child: const ShimmerListTile3())
                         ),
 
 
@@ -161,10 +157,8 @@ class _AssignmentStatusState extends ConsumerState<AssignmentStatus> {
 
                   }
                   else{
-                    return Container(
-                      child: Text(
-                        'No Submission',style: TextStyle(color: Colors.black,fontSize: 15.sp,fontWeight: FontWeight.bold),
-                      ),
+                    return Text(
+                      'No Submission',style: TextStyle(color: Colors.black,fontSize: 15.sp,fontWeight: FontWeight.bold),
                     );
 
                   }
@@ -172,9 +166,9 @@ class _AssignmentStatusState extends ConsumerState<AssignmentStatus> {
                 },
                 error: (err, stack) => Center(child: Text('$err')),
                 loading: () =>
-                    Container(
+                    SizedBox(
                         height: 100.h,
-                        child: ShimmerListTile3())),
+                        child: const ShimmerListTile3())),
           ),
 
 

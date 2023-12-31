@@ -2,14 +2,15 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:eschool/api/api.dart';
+import 'package:eschool/features/model/notification_model.dart';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../api/api.dart';
 import '../../authentication/providers/auth_provider.dart';
 import '../../main.dart';
-import '../model/notification_model.dart';
 
 
 final notificationProvider2 = FutureProvider.family<List<NotificationModel>, String>((ref, id) async {

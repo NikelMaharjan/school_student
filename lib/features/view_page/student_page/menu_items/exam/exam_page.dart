@@ -19,7 +19,7 @@ class ExamPage extends ConsumerStatefulWidget {
 
   final int class_id;
 
-  ExamPage({required this.class_id});
+  ExamPage({super.key, required this.class_id});
 
   @override
   ConsumerState<ExamPage> createState() => _ExamPageState();
@@ -44,7 +44,7 @@ class _ExamPageState extends ConsumerState<ExamPage> with TickerProviderStateMix
       decoration: BoxDecoration(
           color: bgColor,
           borderRadius:
-          BorderRadius.vertical(bottom: Radius.circular(25))),
+          const BorderRadius.vertical(bottom: Radius.circular(25))),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -58,7 +58,7 @@ class _ExamPageState extends ConsumerState<ExamPage> with TickerProviderStateMix
                 onPressed: () {
                   Get.back();
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   color: Colors.white,
                 ),
@@ -86,33 +86,33 @@ class _ExamPageState extends ConsumerState<ExamPage> with TickerProviderStateMix
                       color: primary,
                       borderRadius: BorderRadius.circular(10)
                   ),
-                  tabs: [
+                  tabs: const [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Tab(text: 'MON',),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Tab(text: 'TUE'),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Tab(text: 'WED'),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Tab(text: 'THU'),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Tab(text: 'FRI'),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Tab(text: 'SAT'),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Tab(text: 'SUN'),
                     ),
 

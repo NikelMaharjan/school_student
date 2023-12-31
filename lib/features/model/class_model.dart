@@ -23,7 +23,7 @@ class ClassSubject {
     return ClassSubject(
       id: json['id'],
       subject: Subject2.fromJson(json['subject']),
-      classSection: json['class_section']==null?ClassSection.fromJson(json['class_section']):null,
+      classSection: ClassSection.fromJson(json['class_section']),
       teacher: EmployeeData2.fromJson(json['teacher']),
     );
   }

@@ -20,7 +20,11 @@ import '../../../../../exceptions/internet_exceptions.dart';
 
 class NoticeBoard extends ConsumerStatefulWidget {
   final int class_sec_id;
-  NoticeBoard({required this.class_sec_id});
+
+   int? selected_index;
+
+  NoticeBoard({super.key, required this.class_sec_id, this.selected_index});
+
 
   @override
   ConsumerState<NoticeBoard> createState() => _NoticeBoard();
@@ -31,7 +35,7 @@ class _NoticeBoard extends ConsumerState<NoticeBoard> with TickerProviderStateMi
   Widget build(BuildContext context) {
     final auth = ref.watch(authProvider);
 
-    TabController _tabController = TabController(length: 2, vsync: this);
+    TabController tabController = TabController(initialIndex: widget.selected_index == null ? 0 :1, length: 2, vsync: this);
     return ConnectivityChecker(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -44,7 +48,7 @@ class _NoticeBoard extends ConsumerState<NoticeBoard> with TickerProviderStateMi
                 decoration: BoxDecoration(
                     color: bgColor,
                     borderRadius:
-                    BorderRadius.vertical(bottom: Radius.circular(25))),
+                    const BorderRadius.vertical(bottom: Radius.circular(25))),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -58,7 +62,7 @@ class _NoticeBoard extends ConsumerState<NoticeBoard> with TickerProviderStateMi
                           onPressed: () {
                             Get.back();
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_back,
                             color: Colors.white,
                           ),
@@ -78,7 +82,7 @@ class _NoticeBoard extends ConsumerState<NoticeBoard> with TickerProviderStateMi
                       height: 10.h,
                     ),
                     TabBar(
-                        controller: _tabController,
+                        controller: tabController,
                         padding: EdgeInsets.symmetric(
                             vertical: 15.h, horizontal: 30.w),
                         labelStyle: TextStyle(
@@ -95,15 +99,15 @@ class _NoticeBoard extends ConsumerState<NoticeBoard> with TickerProviderStateMi
                         indicator: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
-                        tabs: [
+                        tabs: const [
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
                             child: Tab(
                               text: 'School Notice',
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
                             child: Tab(
                                 text: 'Class Notice'
                             ),
@@ -111,7 +115,7 @@ class _NoticeBoard extends ConsumerState<NoticeBoard> with TickerProviderStateMi
                         ])
                   ],
                 )),
-            Container(
+            SizedBox(
               // color: Colors.red,
                 height: MediaQuery.of(context).size.height * 3.6 / 5,
                 child: Padding(
@@ -119,7 +123,7 @@ class _NoticeBoard extends ConsumerState<NoticeBoard> with TickerProviderStateMi
                   child: TabBarView(
                     // physics: NeverScrollableScrollPhysics(),
 
-                    controller: _tabController,
+                    controller: tabController,
                     children: [
                       SchoolNotice(),
                       ClassNotice(class_sec_id: widget.class_sec_id)
@@ -132,10 +136,10 @@ class _NoticeBoard extends ConsumerState<NoticeBoard> with TickerProviderStateMi
 
         floatingActionButton: FloatingActionButton(
           onPressed: (){
-            ref.refresh(noticeList(auth.user.token));
+            ref.invalidate(noticeList(auth.user.token));
           },
-          child: Icon(Icons.refresh,color: Colors.white,),
           backgroundColor: primary,
+          child: const Icon(Icons.refresh,color: Colors.white,),
         ),
 
       ),

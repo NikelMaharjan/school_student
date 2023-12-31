@@ -14,7 +14,7 @@ class AddNote extends ConsumerStatefulWidget {
 
   final int student_id;
 
-  AddNote({required this.student_id });
+  const AddNote({super.key, required this.student_id });
 
   @override
   ConsumerState<AddNote> createState() => _AddNoteState(student_id: student_id);
@@ -32,8 +32,8 @@ class _AddNoteState extends ConsumerState<AddNote> {
   DateTime _endDate = DateTime.now();
 
   // Controllers for the text fields
-  TextEditingController _startDateController = TextEditingController();
-  TextEditingController _endDateController = TextEditingController();
+  final TextEditingController _startDateController = TextEditingController();
+  final TextEditingController _endDateController = TextEditingController();
 
   // Function to show the date picker dialog
   Future<void> _showDatePicker(BuildContext context, TextEditingController controller) async {
@@ -95,7 +95,7 @@ class _AddNoteState extends ConsumerState<AddNote> {
 
 
           backgroundColor: primary,
-          title: Text('Add Leave Note', style: TextStyle(color: Colors.white),),
+          title: const Text('Add Leave Note', style: TextStyle(color: Colors.white),),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -104,27 +104,23 @@ class _AddNoteState extends ConsumerState<AddNote> {
             child: ListView(
               children: [
 
-                Container(
-                  // height: MediaQuery.of(context).size.height * 0.07,
-
-                    child: Row(
-                      mainAxisAlignment:
-                      MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          'Long leave?',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        Transform.scale(
-                          scale: 0.8,
-                          child: CupertinoSwitch(
-                              activeColor: primary,
-                              value: isSwitched,
-                              onChanged: toggleSwitch
-                          ),
-                        )
-                      ],
-                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      'Long leave?',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    Transform.scale(
+                      scale: 0.8,
+                      child: CupertinoSwitch(
+                          activeColor: primary,
+                          value: isSwitched,
+                          onChanged: toggleSwitch
+                      ),
+                    )
+                  ],
+                ),
 
 
                 SizedBox(height: 10.h,),
@@ -141,7 +137,7 @@ class _AddNoteState extends ConsumerState<AddNote> {
                         child: TextFormField(
                           controller: _startDateController,
                           onTap: () {
-                            FocusScope.of(context).requestFocus(new FocusNode());
+                            FocusScope.of(context).requestFocus(FocusNode());
                             _showDatePicker(context, _startDateController);
                           },
                           validator: (val) {
@@ -152,16 +148,16 @@ class _AddNoteState extends ConsumerState<AddNote> {
                           },
 
 
-                          style:TextStyle(color:Colors.black) ,
+                          style:const TextStyle(color:Colors.black) ,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(horizontal: 8.w),
                             hintText: 'Start Date',
-                            hintStyle: TextStyle(color:Colors.black)
+                            hintStyle: const TextStyle(color:Colors.black)
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(width: 16.0),
+                    const SizedBox(width: 16.0),
 
                     Expanded(
                       child: isSwitched == true?  Container(
@@ -174,15 +170,15 @@ class _AddNoteState extends ConsumerState<AddNote> {
                           onTap: () {
                             _showDatePicker(context, _endDateController);
                           },
-                          style:TextStyle(color:Colors.black) ,
+                          style:const TextStyle(color:Colors.black) ,
                           onEditingComplete: () {},
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(horizontal: 8.w),
                             hintText: 'End Date',
-                              hintStyle: TextStyle(color:Colors.black)
+                              hintStyle: const TextStyle(color:Colors.black)
                           ),
                         ),
-                      ):SizedBox(),
+                      ):const SizedBox(),
                     ),
                   ],
                 ),
@@ -196,8 +192,8 @@ class _AddNoteState extends ConsumerState<AddNote> {
                       border: Border.all(color: Colors.black)),
                   child: TextFormField(
                     controller: reasonController,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
+                    style: const TextStyle(color: Colors.black),
+                    decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         hintText: 'Reason',
@@ -213,7 +209,7 @@ class _AddNoteState extends ConsumerState<AddNote> {
                 ),
 
 
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
 
 
 
@@ -226,7 +222,7 @@ class _AddNoteState extends ConsumerState<AddNote> {
                         shape: RoundedRectangleBorder(
                             borderRadius:
                             BorderRadius.circular(10),
-                            side: BorderSide(
+                            side: const BorderSide(
                               color: Colors.black,
                             ))),
                     onPressed: () {
@@ -236,7 +232,6 @@ class _AddNoteState extends ConsumerState<AddNote> {
 
                         if(isSwitched == false) {
                           if(DateTime.parse(_startDateController.text).isBefore(DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.now())))){
-                            print('1');
                             return SnackShow.showFailure(context, 'Date is before current date');
 
                           }
@@ -286,9 +281,9 @@ class _AddNoteState extends ConsumerState<AddNote> {
                     child: leave.isLoad
                         ? CircleAvatar(
                         radius: 15.sp,
-                        child: CircularProgressIndicator()
+                        child: const CircularProgressIndicator()
                     )
-                        :Text('Submit')
+                        :const Text('Submit')
                 ),
 
 

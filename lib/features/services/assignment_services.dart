@@ -14,11 +14,23 @@ import 'package:path/path.dart';
 import 'package:file_picker/file_picker.dart';
 
 final assignmentList = FutureProvider.family(
-        (ref, String token) => AssignmentService(token).getAssignment());
-final assignmentStatusList = FutureProvider.family(
-        (ref, String token) => AssignmentService(token).getAssignmentStatus());
+        (ref, String token) => AssignmentService(token: token).getAssignment());
+final assignmentStatusList = FutureProvider.family.autoDispose(
+        (ref, String token) => AssignmentService(token: token).getAssignmentStatus());
+
+
+
 final studentAssignmentProvider = FutureProvider.family(
         (ref, String token) => StudentAssignmentService(token).getStudents());
+
+
+
+
+final assignmentNotificationStatusList = FutureProvider.family<List<StudentAssignmentStatus>, int>((ref, id) async {
+  final token = ref.watch(authProvider);
+  final assignment = AssignmentService(token: token.user!.token, id: id);
+  return await assignment.getNotificationAssignmentStatus();
+});
 
 
 
@@ -32,10 +44,14 @@ final subAssignmentProvider = FutureProvider.family<List<Assignment>, int>((ref,
 
 
 
+
+
 class AssignmentService {
   String token;
 
-  AssignmentService(this.token);
+  int? id;
+
+  AssignmentService({required this.token, this.id});
 
   final dio = Dio();
 
@@ -52,6 +68,23 @@ class AssignmentService {
       final response = await dio.get(Api.assignmentUrl,
           options: Options(headers: {HttpHeaders.authorizationHeader: 'token $token'}));
       final data = (response.data['navigation']['data'] as List).map((e) => Assignment.fromJson(e)).toList();
+      return data;
+    } on DioException catch (err) {
+      print(err.response);
+      throw Exception('Unable to fetch data');
+    }
+  }
+
+
+  Future<List<StudentAssignmentStatus>> getNotificationAssignmentStatus() async {
+    try {
+      final response = await dio.get("${Api.assignmentNotificationStatus}$id/",
+          options: Options(
+              headers: {HttpHeaders.authorizationHeader: 'token $token'}));
+      final data = (response.data['data'] as List)
+          .map((e) => StudentAssignmentStatus.fromJson(e))
+          .toList();
+      // print('success');
       return data;
     } on DioException catch (err) {
       print(err.response);

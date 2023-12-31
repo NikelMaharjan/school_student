@@ -2,27 +2,19 @@ import 'package:eschool/api/api.dart';
 import 'package:eschool/features/services/notice_services.dart';
 import 'package:eschool/features/services/student_services.dart';
 import 'package:eschool/authentication/providers/auth_provider.dart';
-import 'package:eschool/constants/colors.dart';
 import 'package:eschool/features/view_page/student_page/menu_items/attendance/attendance_page.dart';
 import 'package:eschool/features/view_page/student_page/menu_items/exam/exam_page.dart';
 import 'package:eschool/features/view_page/student_page/menu_items/school_calender.dart';
-import 'package:eschool/features/view_page/student_page/menu_items/parent_profile.dart';
 import 'package:eschool/features/view_page/student_page/menu_items/notices/notice_page.dart';
 import 'package:eschool/features/view_page/student_page/menu_items/report_page.dart';
 import 'package:eschool/features/view_page/student_page/menu_items/result/result_page.dart';
-import 'package:eschool/authentication/login_pages/parent_login.dart';
-import 'package:eschool/authentication/login_pages/student_page.dart';
-import 'package:eschool/features/view_page/sample_pages/profile_samples/sample_profile.dart';
 import 'package:eschool/utils/commonWidgets.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:icon_decoration/icon_decoration.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../services/feature_services.dart';
 import 'menu_items/settings_page.dart';
-import 'menu_items/result/result_page.dart';
 import 'menu_items/timetable/timetable_page.dart';
 
 class MenuPage extends ConsumerStatefulWidget {

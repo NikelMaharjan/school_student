@@ -17,7 +17,7 @@ import '../../model/bus_model.dart';
 
 class BusLocationPage extends ConsumerStatefulWidget {
   final int id;
-  BusLocationPage({required this.id});
+  const BusLocationPage({super.key, required this.id});
 
   @override
   _BusLocationPageState createState() => _BusLocationPageState();
@@ -28,21 +28,22 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
   late Dio _dio;
   late Timer _timer;
   LatLng? busPosition;
-  LatLng currentPosition = LatLng(0.0, 0.0);
+  LatLng currentPosition = const LatLng(0.0, 0.0);
   Set<Marker> marker = {};
   late GoogleMapController _controller ;
   late BitmapDescriptor _busIcon;
+
 
   @override
   void initState() {
     super.initState();
     _streamController = StreamController<List<BusLocation>>();
     _dio = Dio();
-    _timer = Timer.periodic(Duration(seconds: 10), (_) => fetchBusLocations());
+    _timer = Timer.periodic(const Duration(seconds: 10), (_) => fetchBusLocations());
     trackPosition();
     BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(size: Size(10.w, 10.h)), // Set the desired size of the marker icon
-      'assets/images/bus3.png',
+      const ImageConfiguration(size: Size(2,2)), // Set the desired size of the marker icon
+      'assets/images/bus.png',
     ).then((descriptor) {
       setState(() {
         _busIcon = descriptor;
@@ -52,7 +53,8 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
 
   Future<void> trackPosition() async {
 
-      final reqPermission = await Geolocator.requestPermission();
+
+    final reqPermission = await Geolocator.requestPermission();
       final checkPermission = await Geolocator.checkPermission();
       if(checkPermission==LocationPermission.deniedForever||checkPermission==LocationPermission.denied){
         return showDialog(
@@ -61,7 +63,7 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
             builder: (context){
               return AlertDialog(
 
-                content: Text('Please give Access to location through settings'),
+                content: const Text('Please give Access to location through settings'),
                 actions: [
                   TextButton(
                     style: TextButton.styleFrom(
@@ -70,7 +72,7 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
                       onPressed: ()async{
                       await Geolocator.openAppSettings();
                       },
-                      child: Text('Go to settings',style: TextStyle(color: Colors.white),)
+                      child: const Text('Go to settings',style: TextStyle(color: Colors.white),)
                   ),
                   TextButton(
                       style: TextButton.styleFrom(
@@ -79,7 +81,7 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
                       onPressed: (){
                         Get.offAll(OverviewPage());
                       },
-                      child: Text('No',style: TextStyle(color: Colors.white),)
+                      child: const Text('No',style: TextStyle(color: Colors.white),)
                   )
                 ],
               );
@@ -136,9 +138,10 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
         busPosition = LatLng(busLocations.first.latitude, busLocations.first.longitude);
         marker.add(
             Marker(
-                infoWindow: InfoWindow(title: 'Bus'),
-                markerId: MarkerId('Bus'),
+                infoWindow: const InfoWindow(title: 'Bus'),
+                markerId: const MarkerId('Bus'),
                 position: LatLng(busPosition?.latitude??0, busPosition?.longitude??0) ,
+
             )
         );
       });
@@ -156,7 +159,7 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
       backgroundColor:Colors.white,
       appBar: AppBar(
         backgroundColor: primary,
-        title: Text('Bus Locations', style: TextStyle(color: Colors.white),),
+        title: const Text('Bus Locations', style: TextStyle(color: Colors.white),),
       ),
       body: StreamBuilder<List<BusLocation>>(
 
@@ -171,9 +174,9 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ListTile(
-                  title: Text('Bus ID: ${busLocations?.first.bus.toString()}',style: TextStyle(color: Colors.black),),
+                  title: Text('Bus ID: ${busLocations?.first.bus.toString()}',style: const TextStyle(color: Colors.black),),
                   subtitle: Text(
-                    'Latitude: ${busLocations?.first.latitude.toString()}, Longitude: ${busLocations?.first.longitude.toString()}',style: TextStyle(color: Colors.black)
+                    'Latitude: ${busLocations?.first.latitude.toString()}, Longitude: ${busLocations?.first.longitude.toString()}',style: const TextStyle(color: Colors.black)
                   ),
                 ),
                 SizedBox(
@@ -190,7 +193,7 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
                     markers: marker,
                       initialCameraPosition: CameraPosition(
                         zoom: 15,
-                          target: busPosition??LatLng(0, 0),
+                          target: busPosition??const LatLng(0, 0),
                       )
                   ),
                 ),
@@ -205,16 +208,16 @@ class _BusLocationPageState extends ConsumerState<BusLocationPage> {
                       onPressed: (){
                         _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
                             zoom: 70,
-                            target: busPosition??LatLng(0.0, 0.0))));
+                            target: busPosition??const LatLng(0.0, 0.0))));
 
                       },
-                      child: Text('Track your bus',style:TextStyle(color:Colors.white))
+                      child: const Text('Track your bus',style:TextStyle(color:Colors.white))
                   ),
                 )
               ],
             );
           } else if (snapshot.hasError) {
-            return Text(
+            return const Text(
               'Error fetching bus locations',
               style: TextStyle(color: Colors.red),
             );

@@ -19,15 +19,15 @@ class _AssignmentOverviewState extends State<AssignmentOverview>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: bgColor,
-        title: Text("Assignment", style: TextStyle(color: Colors.white),),
+        title: const Text("Assignment", style: TextStyle(color: Colors.white),),
       ),
         backgroundColor: Colors.white,
-        body: Container(
+        body: SizedBox(
             // color: Colors.red,
             height: MediaQuery.of(context).size.height * 3.8 / 5,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 0.h, horizontal: 15.w),
-              child: AssignmentTabs(),
+              child: const AssignmentTabs(),
             )));
   }
 }

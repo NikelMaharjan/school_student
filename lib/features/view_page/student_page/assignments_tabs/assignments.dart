@@ -21,7 +21,7 @@ class Assignments extends ConsumerWidget {
   final int student_id;
   final String className;
   final String section;
-  Assignments({required this.subject,required this.student_id,required this.section,required this.className});
+  const Assignments({super.key, required this.subject,required this.student_id,required this.section,required this.className});
 
   @override
   Widget build(BuildContext context,ref) {
@@ -37,11 +37,11 @@ class Assignments extends ConsumerWidget {
           if(assignment.isNotEmpty){
             return ListView.builder(
               padding: EdgeInsets.zero,
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               itemCount: assignment.length,
               itemBuilder: (context,index){
-                return Container(
+                return SizedBox(
                   height: 110.h,
                   // color: Colors.red,
 
@@ -79,7 +79,7 @@ class Assignments extends ConsumerWidget {
                                   ),
                                   child: Center(
                                       child: Text((index + 1).toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20
                                         ),
@@ -92,7 +92,7 @@ class Assignments extends ConsumerWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Container(width: 200.w,child: Text(assignment[index].title,style: TextStyle(color: Colors.black,fontSize: 18.sp,),maxLines: 1,)),
+                                    SizedBox(width: 200.w,child: Text(assignment[index].title,style: TextStyle(color: Colors.black,fontSize: 18.sp,),maxLines: 1,)),
                                     Text(assignment[index].description,style: TextStyle(color: Colors.black54,fontSize: 12.sp),maxLines: 1,),
                                     SizedBox(height: 10.h,),
                                     assignment[index].hasDeadline==true? Text(assignment[index].deadline!,style: TextStyle(color: Colors.black45,fontSize: 12.sp),):Text('No Deadline',style: TextStyle(color: Colors.black45,fontSize: 12.sp),) ,
@@ -112,11 +112,11 @@ class Assignments extends ConsumerWidget {
               },
             );
           }
-          return Center(child: Text('No Assignment'));
+          return const Center(child: Text('No Assignment'));
 
         },
         error:  (err, stack) => Center(child: Text('$err')),
-        loading: () => Container(child: Center(child: ShimmerListTile2()))
+        loading: () => const Center(child: ShimmerListTile2())
     );
 
 

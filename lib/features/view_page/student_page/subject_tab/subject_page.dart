@@ -41,8 +41,7 @@ class Subjects extends ConsumerStatefulWidget {
       );
 }
 
-class _SubjectsState extends ConsumerState<Subjects>
-    with TickerProviderStateMixin {
+class _SubjectsState extends ConsumerState<Subjects> with TickerProviderStateMixin {
   final int subject_id;
   final String class_level_name;
   final String sec_name;
@@ -88,10 +87,14 @@ class _SubjectsState extends ConsumerState<Subjects>
 
   @override
   Widget build(BuildContext context) {
+
+
+
+    print("Subject Id ${widget.subject_id} SubjectName ${widget.subject_name} ClassLevelName ${widget.class_level_name} SecName ${widget.sec_name} ClassSecID ${widget.class_sec_id} Classsecsubid ${widget.class_Sec_Sub_id} ");
+
     final auth = ref.watch(authProvider);
     final schoolData = ref.watch(schoolInfo(auth.user.token));
 
-    print("This is subject id $subject_id");
 
 
     return DefaultTabController(

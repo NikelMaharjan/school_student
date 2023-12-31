@@ -12,7 +12,7 @@ import '../../../../../utils/commonWidgets.dart';
 
 class ClassNotice extends ConsumerWidget {
   final int class_sec_id;
-  ClassNotice({required this.class_sec_id});
+  const ClassNotice({super.key, required this.class_sec_id});
 
   @override
   Widget build(BuildContext context,ref) {
@@ -28,7 +28,7 @@ class ClassNotice extends ConsumerWidget {
 
           return ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               itemCount: allNotice.length,
               itemBuilder: (context, index) {
@@ -38,8 +38,8 @@ class ClassNotice extends ConsumerWidget {
                     createdAt: allNotice[index].createdAt);
               });
         },
-        error: (err, stack) => Center(child: Text('$err',style: TextStyle(color: Colors.black),)),
-        loading: () => NoticeShimmer(),
+        error: (err, stack) => Center(child: Text('$err',style: const TextStyle(color: Colors.black),)),
+        loading: () => const NoticeShimmer(),
       ),
     );
   }

@@ -42,100 +42,103 @@ class _DefaultPageState extends State<DefaultPage> with TickerProviderStateMixin
 
 
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+
 
 
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: ()=> _onBackPressed(context).then((value) => value?? false),
-      child: ConnectivityChecker(
-        child: Scaffold(
-          backgroundColor: Colors.white,
-          body: Stack(
-            children: [
+    return ConnectivityChecker(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Stack(
+          children: [
 
-              _pages.elementAt(_index),
+            _pages.elementAt(_index),
 
-              AnimatedContainer(
-                alignment: Alignment(boxX, boxY),
-                curve: Curves.bounceIn,
-                duration: Duration(milliseconds:500),
-                child: Card(
-                  elevation: 5,
-                  color: Colors.white,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: SizedBox(
-                      width: 350.w,
-                      height: 70.h,
-                      child: Theme(
-                        data: Theme.of(context).copyWith(
-                            canvasColor: Colors.white
-                        ),
-                        child: BottomNavigationBar(
+            AnimatedContainer(
+              alignment: Alignment(boxX, boxY),
+              curve: Curves.bounceIn,
+              duration: Duration(milliseconds:500),
+              child: Card(
+                elevation: 5,
+                color: Colors.white,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: SizedBox(
+                    width: 350.w,
+                    height: 70.h,
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                          canvasColor: Colors.white
+                      ),
+                      child: BottomNavigationBar(
 
-                            backgroundColor: Colors.white,
-                            selectedItemColor: pre_color,
-                            unselectedItemColor: Colors.grey,
-                            showSelectedLabels: true,
-                            showUnselectedLabels: true,
-                            onTap:(int index){
-                              if(index == 2) {
-                                showModalBottomSheet<void>(
-                                  isScrollControlled: true,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(40)
-                                    ),
-                                    backgroundColor: Colors.red,
+                          backgroundColor: Colors.white,
+                          selectedItemColor: pre_color,
+                          unselectedItemColor: Colors.grey,
+                          showSelectedLabels: true,
+                          showUnselectedLabels: true,
+                          onTap:(int index){
+                            if(index == 2) {
+                              showModalBottomSheet<void>(
+                                isScrollControlled: true,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(40)
+                                  ),
+                                  backgroundColor: Colors.red,
 
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return SizedBox(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return SizedBox(
 
-                                          height: MediaQuery.of(context).copyWith().size.height * 0.7 ,
-                                          child: MenuPage()
-                                      );
-                                    });
-                              }
-                              else{
-                                setState(() {
-                                  _index=index;
-                                });
-                              }
-                            },
-                            currentIndex: _index,
-                            items:[
+                                        height: MediaQuery.of(context).copyWith().size.height * 0.7 ,
+                                        child: MenuPage()
+                                    );
+                                  });
+                            }
+                            else{
+                              setState(() {
+                                _index=index;
+                              });
+                            }
+                          },
+                          currentIndex: _index,
+                          items:[
 
-                              BottomNavigationBarItem(icon: DecoratedIcon(
-                                icon: Icon(EvaIcons.home,size: 27.sp,),
-                                decoration: IconDecoration(border: IconBorder(
-                                    width: 0.1.w
-                                )),
-                              ),label:'Home'),
-                              BottomNavigationBarItem(
-                                icon: DecoratedIcon(
-                                icon: Icon(EvaIcons.book,size: 27.sp,),
-                                decoration: IconDecoration(border: IconBorder(
-                                    width: 1.w
-                                )),),label:'Subjects',),
-                              BottomNavigationBarItem(icon: DecoratedIcon(
-                                icon: Icon(EvaIcons.menu,size: 27.sp,),
-                                decoration: IconDecoration(border: IconBorder(
-                                    width: 1.w
-                                )),),label:'Menu'),
-                            ]
+                            BottomNavigationBarItem(icon: DecoratedIcon(
+                              icon: Icon(EvaIcons.home,size: 27.sp,),
+                              decoration: IconDecoration(border: IconBorder(
+                                  width: 0.1.w
+                              )),
+                            ),label:'Home'),
+                            BottomNavigationBarItem(
+                              icon: DecoratedIcon(
+                              icon: Icon(EvaIcons.book,size: 27.sp,),
+                              decoration: IconDecoration(border: IconBorder(
+                                  width: 1.w
+                              )),),label:'Subjects',),
+                            BottomNavigationBarItem(icon: DecoratedIcon(
+                              icon: Icon(EvaIcons.menu,size: 27.sp,),
+                              decoration: IconDecoration(border: IconBorder(
+                                  width: 1.w
+                              )),),label:'Menu'),
+                          ]
 
-                        ),
                       ),
                     ),
                   ),
-                ) ,
-              ),
+                ),
+              ) ,
+            ),
 
 
-            ],
-          ),
+          ],
         ),
       ),
     );

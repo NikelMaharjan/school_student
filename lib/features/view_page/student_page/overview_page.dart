@@ -48,7 +48,21 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
   int? subject_id;
 
   String notification_token = '';
-  final notificationTypes = [ 'Calendar events','Notice', 'Invigillator info', 'Class section', 'Class notice','Assignment', 'Student assignment', 'Student total fee', 'Exam class', 'Admit card', 'Total exam marks'];
+  final notificationTypes = [
+    'Calendar events',
+    'Notice',
+    'Invigillator info',
+    'Class section',
+    'Class notice',
+    'Assignment',
+    'Student assignment',
+    'Student total fee',
+    'Exam class',
+    'Admit card',
+    'Total exam marks',
+    'Subject notice',
+    'Assignment status'
+  ];
 
 
 
@@ -82,6 +96,15 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
               else if(message.data['notification_type']==notificationTypes[10]){
                 Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
               }
+
+              else if(message.data['notification_type'] =="Subject notice" ){
+                Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+              }
+
+              else if(message.data['notification_type'] =="Assignment status" ){
+                Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+              }
+
               else{
                 Get.to(NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
               }
@@ -117,6 +140,13 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
           else if(message.data['notification_type']==notificationTypes[10]){
             Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
           }
+          else if(message.data['notification_type'] =="Subject notice" ){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+
+          else if(message.data['notification_type'] =="Assignment status" ){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
           else{
             Get.to(NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
           }
@@ -147,6 +177,13 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
             Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
           }
           else if(message.data['notification_type']==notificationTypes[10]){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+          else if(message.data['notification_type'] =="Subject notice" ){
+            Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
+          }
+
+          else if(message.data['notification_type'] =="Assignment status" ){
             Get.to(()=>NotificationPage(notification_token: notification_token, class_sec_id: class_id!, student_id: student_id!));
           }
           else{
@@ -336,7 +373,10 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
                                                 InkWell(
                                                     onTap: (){
 
-                                                      Get.to(()=>NotificationPage(notification_token: notification_token,class_sec_id: class_data.className!.id,student_id: class_data.student.id,));
+
+
+                                                      Get.to(()=>NotificationPage(
+                                                        notification_token: notification_token,class_sec_id: class_data.className!.id,student_id: class_data.student.id,));
                                                     },
                                                     child: Icon(Icons.notifications, size: 25.sp, color: Colors.white)
                                                 ),
@@ -519,9 +559,15 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
 
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 8.h),
-                    child: Text('My Subjects',
-                        style: TextStyle(fontSize: 24.sp, color: Colors.black)),
+                    child:  Text('My Subjects',
+                        style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black)),
                   ),
+
+                  SizedBox(height: 18,),
+
                   Padding(
                     padding: EdgeInsets.only(left: 20.w),
                     child: Container(
@@ -576,42 +622,41 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Latest Notices',
-                            style: TextStyle(fontSize: 20.sp, color: Colors.black)),
-                        InkWell(
-                            onTap: () => Get.to(() => NoticeBoard(class_sec_id: class_data.className!.id,)),
-                            child: Text('view all >',
-                                style: TextStyle(
-                                    fontSize: 15.sp, color: Colors.grey))),
+                        Text('Latest Notice',
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
+                        TextButton(
+                            onPressed: (){
+                              Get.to(() => NoticeBoard(class_sec_id: class_data.className!.id,));},
+                            child: Text('View all >',style: TextStyle(color: Colors.grey),)
+                        )
                       ],
                     ),
                   ),
-                  Center(
-                    child: Container(
-                      width: 360.w,
-                      // height: 500.h,
-                      child: noticeData.when(
-                        data: (data) {
-                          final allNotice = data.where((element) => element.forAllClass == true).toList();
-                          return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: allNotice.length == 0 ? 0 : 1,
-                              itemBuilder: (context, index) {
-                                return NoticeCard3(
-                                    title: allNotice[index].title,
-                                    image: allNotice[index].image!=null?'${Api.basePicUrl}${allNotice[index].image}':null,
-                                    description: allNotice[index].description,
-                                    createdAt: '${DateFormat('MMMM dd').format(DateTime.parse(allNotice[index].createdAt))}');
-                              });
-                        },
-                        error: (err, stack) => Center(child: Text('$err')),
-                        loading: () => NoticeShimmer(),
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: noticeData.when(
+                      data: (data) {
+                        final allNotice = data.where((element) => element.forAllClass == true).toList();
+                        return ListView.builder(
+                            padding: EdgeInsets.zero,
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: allNotice.length == 0 ? 0 : 1,
+                            itemBuilder: (context, index) {
+                              return NoticeCard3(
+                                  title: allNotice[index].title,
+                                  image: allNotice[index].image!=null?'${Api.basePicUrl}${allNotice[index].image}':null,
+                                  description: allNotice[index].description,
+                                  createdAt: '${DateFormat('MMMM dd').format(DateTime.parse(allNotice[index].createdAt))}');
+                            });
+                      },
+                      error: (err, stack) => Center(child: Text('$err')),
+                      loading: () => NoticeShimmer(),
                     ),
                   ),
-                  SizedBox(height: 150.h,)
                 ],
               ),
             );

@@ -23,7 +23,7 @@ class Settings extends ConsumerWidget {
           Container(
             width: double.infinity,
             height: 150.h,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(40),
                 ),
@@ -48,11 +48,11 @@ class Settings extends ConsumerWidget {
                       padding: EdgeInsets.symmetric(vertical: 5.h),
                       children: [
                         ListTile(
-                          visualDensity: VisualDensity(vertical: -3),
+                          visualDensity: const VisualDensity(vertical: -3),
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Change Password',
+                              const Text('Change Password',
                                   style: TextStyle(color: Colors.black)),
                               Icon(
                                 Icons.arrow_forward_ios,
@@ -63,11 +63,11 @@ class Settings extends ConsumerWidget {
                           ),
                         ),
                         ListTile(
-                          visualDensity: VisualDensity(vertical: -4),
+                          visualDensity: const VisualDensity(vertical: -4),
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Privacy Policy',
+                              const Text('Privacy Policy',
                                   style: TextStyle(color: Colors.black)),
                               Icon(
                                 Icons.arrow_forward_ios,
@@ -78,11 +78,11 @@ class Settings extends ConsumerWidget {
                           ),
                         ),
                         ListTile(
-                          visualDensity: VisualDensity(vertical: -3),
+                          visualDensity: const VisualDensity(vertical: -3),
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Terms & Condition',
+                              const Text('Terms & Condition',
                                   style: TextStyle(color: Colors.black)),
                               Icon(
                                 Icons.arrow_forward_ios,
@@ -93,11 +93,11 @@ class Settings extends ConsumerWidget {
                           ),
                         ),
                         ListTile(
-                          visualDensity: VisualDensity(vertical: -3),
+                          visualDensity: const VisualDensity(vertical: -3),
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('About Us',
+                              const Text('About Us',
                                   style: TextStyle(color: Colors.black)),
                               Icon(
                                 Icons.arrow_forward_ios,
@@ -108,11 +108,11 @@ class Settings extends ConsumerWidget {
                           ),
                         ),
                         ListTile(
-                          visualDensity: VisualDensity(vertical: -3),
+                          visualDensity: const VisualDensity(vertical: -3),
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Contact Us',
+                              const Text('Contact Us',
                                   style: TextStyle(color: Colors.black)),
                               Icon(
                                 Icons.arrow_forward_ios,
@@ -123,11 +123,11 @@ class Settings extends ConsumerWidget {
                           ),
                         ),
                         ListTile(
-                          visualDensity: VisualDensity(vertical: -3),
+                          visualDensity: const VisualDensity(vertical: -3),
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Rate Us',
+                              const Text('Rate Us',
                                   style: TextStyle(color: Colors.black)),
                               Icon(
                                 Icons.arrow_forward_ios,
@@ -138,11 +138,11 @@ class Settings extends ConsumerWidget {
                           ),
                         ),
                         ListTile(
-                          visualDensity: VisualDensity(vertical: -3),
+                          visualDensity: const VisualDensity(vertical: -3),
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Share',
+                              const Text('Share',
                                   style: TextStyle(color: Colors.black)),
                               Icon(
                                 Icons.arrow_forward_ios,
@@ -185,7 +185,7 @@ class Settings extends ConsumerWidget {
                           SizedBox(
                             width: 5.h,
                           ),
-                          Text('Log Out'),
+                          const Text('Log Out'),
                         ],
                       ),
                     ))

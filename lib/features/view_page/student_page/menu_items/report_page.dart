@@ -15,7 +15,7 @@ import '../subject_tab/subject_page.dart';
 class ReportPage extends ConsumerWidget {
   final int student_id;
   final StudentClass class_data;
-  ReportPage({required this.class_data,required this.student_id});
+  const ReportPage({super.key, required this.class_data,required this.student_id});
 
   @override
   Widget build(BuildContext context,ref) {
@@ -28,7 +28,7 @@ class ReportPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: bgColor,
-        title: Text("Subjects", style: TextStyle(color: Colors.white),),
+        title: const Text("Subjects", style: TextStyle(color: Colors.white),),
       ),
       backgroundColor: Colors.white,
       body: Column(
@@ -44,7 +44,7 @@ class ReportPage extends ConsumerWidget {
                         itemCount: sub_data.length ,
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             childAspectRatio: 2.w / 2.4.h,
                             crossAxisCount: 3,
@@ -67,7 +67,7 @@ class ReportPage extends ConsumerWidget {
                       );
                     },
                     error:  (err, stack) => Center(child: Text('$err')),
-                    loading: () => GridShimmer()
+                    loading: () => const GridShimmer()
                 )
 
             ),

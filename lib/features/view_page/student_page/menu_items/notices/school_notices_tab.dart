@@ -10,12 +10,14 @@ import '../../../../../utils/commonWidgets.dart';
 import '../../../../services/notice_services.dart';
 
 class SchoolNotice extends ConsumerWidget {
+  const SchoolNotice({super.key});
+
 
   @override
   Widget build(BuildContext context,ref) {
     final auth = ref.watch(authProvider);
     final noticeData = ref.watch(noticeList(auth.user.token));
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 4 / 5,
       // color: Colors.red,
       child: noticeData.when(
@@ -25,7 +27,7 @@ class SchoolNotice extends ConsumerWidget {
               .toList();
           return ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               itemCount: allNotice.length,
               itemBuilder: (context, index) {
@@ -36,7 +38,7 @@ class SchoolNotice extends ConsumerWidget {
               });
         },
         error: (err, stack) => Center(child: Text('$err')),
-        loading: () => NoticeShimmer(),
+        loading: () => const NoticeShimmer(),
       ),
     );
   }

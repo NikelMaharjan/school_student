@@ -11,7 +11,7 @@ import '../../../services/student_services.dart';
 
   class ParentsProfile extends ConsumerWidget {
     final int student_id;
-    ParentsProfile({required this.student_id});
+    const ParentsProfile({super.key, required this.student_id});
   @override
   Widget build(BuildContext context,ref) {
 
@@ -24,7 +24,7 @@ import '../../../services/student_services.dart';
           Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height*1/5,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(40),
                 ),
@@ -33,7 +33,7 @@ import '../../../services/student_services.dart';
               children : [
                 IconButton(
                   onPressed: (){},
-                  icon: Icon(Icons.chevron_left),
+                  icon: const Icon(Icons.chevron_left),
                 ),
                 Expanded(
                   child: Center(
@@ -55,151 +55,148 @@ import '../../../services/student_services.dart';
                     data: (data){
                       final info = data.firstWhere((element) => element.id == student_id);
                       return ListView(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
                         children: [
-                          Container(
-                            // color: Colors.red,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.h, horizontal: 8.h),
-                              child: Stack(
-                                children: [
-                                  Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 25.h,
-                                      ),
-                                      Card(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(20)),
-                                        // elevation:5,
-                                        color: shimmerContentColor,
-                                        child: ListTile(
-                                          title: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                height: 50.h,
-                                              ),
-                                              Divider(
-                                                thickness: 1.h,
-                                                height: 8.h,
-                                                color: Colors.grey,
-                                              ),
-                                              SizedBox(
-                                                height: 10.h,
-                                              ),
-                                              Text('Mother\'s Name:',
-                                                  style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 15.sp)),
-                                              SizedBox(
-                                                height: 5.h,
-                                              ),
-                                              Text(info.motherName,
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold)),
-                                              SizedBox(
-                                                height: 20.h,
-                                              ),
-                                              Text('Date Of Birth',
-                                                  style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 15.sp)),
-                                              SizedBox(
-                                                height: 5.h,
-                                              ),
-                                              Text('1995-01-01',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold)),
-                                              SizedBox(
-                                                height: 20.h,
-                                              ),
-                                              Text('E-mail',
-                                                  style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 15.sp)),
-                                              SizedBox(
-                                                height: 5.h,
-                                              ),
-                                              Text('jane@gmail.com',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold)),
-                                              SizedBox(
-                                                height: 20.h,
-                                              ),
-                                              Text('Occupation',
-                                                  style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 15.sp)),
-                                              SizedBox(
-                                                height: 5.h,
-                                              ),
-                                              Text('Business',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold)),
-                                              SizedBox(
-                                                height: 20.h,
-                                              ),
-                                              Text('Phone Number',
-                                                  style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 15.sp)),
-                                              SizedBox(
-                                                height: 5.h,
-                                              ),
-                                              Text('${info.motherPhoneNumber}',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold)),
-                                              SizedBox(
-                                                height: 20.h,
-                                              ),
-                                              Text('Address',
-                                                  style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 15.sp)),
-                                              SizedBox(
-                                                height: 5.h,
-                                              ),
-                                              Text('-',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold)),
-                                              SizedBox(
-                                                height: 20.h,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Align(
-                                    alignment: Alignment.topCenter,
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 40.sp,
-                                      child: CircleAvatar(
-                                        backgroundColor: Colors.grey,
-                                        radius: 35.sp,
-                                        child: Icon(
-                                          Icons.person,
-                                          color: Colors.black,
-                                          size: 40.sp,
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.h, horizontal: 8.h),
+                            child: Stack(
+                              children: [
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 25.h,
+                                    ),
+                                    Card(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(20)),
+                                      // elevation:5,
+                                      color: shimmerContentColor,
+                                      child: ListTile(
+                                        title: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 50.h,
+                                            ),
+                                            Divider(
+                                              thickness: 1.h,
+                                              height: 8.h,
+                                              color: Colors.grey,
+                                            ),
+                                            SizedBox(
+                                              height: 10.h,
+                                            ),
+                                            Text('Mother\'s Name:',
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 15.sp)),
+                                            SizedBox(
+                                              height: 5.h,
+                                            ),
+                                            Text(info.motherName,
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold)),
+                                            SizedBox(
+                                              height: 20.h,
+                                            ),
+                                            Text('Date Of Birth',
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 15.sp)),
+                                            SizedBox(
+                                              height: 5.h,
+                                            ),
+                                            const Text('1995-01-01',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold)),
+                                            SizedBox(
+                                              height: 20.h,
+                                            ),
+                                            Text('E-mail',
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 15.sp)),
+                                            SizedBox(
+                                              height: 5.h,
+                                            ),
+                                            const Text('jane@gmail.com',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold)),
+                                            SizedBox(
+                                              height: 20.h,
+                                            ),
+                                            Text('Occupation',
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 15.sp)),
+                                            SizedBox(
+                                              height: 5.h,
+                                            ),
+                                            const Text('Business',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold)),
+                                            SizedBox(
+                                              height: 20.h,
+                                            ),
+                                            Text('Phone Number',
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 15.sp)),
+                                            SizedBox(
+                                              height: 5.h,
+                                            ),
+                                            Text('${info.motherPhoneNumber}',
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold)),
+                                            SizedBox(
+                                              height: 20.h,
+                                            ),
+                                            Text('Address',
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 15.sp)),
+                                            SizedBox(
+                                              height: 5.h,
+                                            ),
+                                            const Text('-',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold)),
+                                            SizedBox(
+                                              height: 20.h,
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
-                                  )
-                                ],
-                              ),
+                                  ],
+                                ),
+                                Align(
+                                  alignment: Alignment.topCenter,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 40.sp,
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.grey,
+                                      radius: 35.sp,
+                                      child: Icon(
+                                        Icons.person,
+                                        color: Colors.black,
+                                        size: 40.sp,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                           Container(
@@ -244,7 +241,7 @@ import '../../../services/student_services.dart';
                                                 height: 5.h,
                                               ),
                                               Text(info.fatherName,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: Colors.black,
                                                       fontWeight: FontWeight.bold)),
                                               SizedBox(
@@ -257,7 +254,7 @@ import '../../../services/student_services.dart';
                                               SizedBox(
                                                 height: 5.h,
                                               ),
-                                              Text('1995-12-12',
+                                              const Text('1995-12-12',
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight: FontWeight.bold)),
@@ -271,7 +268,7 @@ import '../../../services/student_services.dart';
                                               SizedBox(
                                                 height: 5.h,
                                               ),
-                                              Text('john@gmail.com',
+                                              const Text('john@gmail.com',
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight: FontWeight.bold)),
@@ -285,7 +282,7 @@ import '../../../services/student_services.dart';
                                               SizedBox(
                                                 height: 5.h,
                                               ),
-                                              Text('Business',
+                                              const Text('Business',
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight: FontWeight.bold)),
@@ -300,7 +297,7 @@ import '../../../services/student_services.dart';
                                                 height: 5.h,
                                               ),
                                               Text('${info.fatherPhoneNumber}',
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: Colors.black,
                                                       fontWeight: FontWeight.bold)),
                                               SizedBox(
@@ -313,7 +310,7 @@ import '../../../services/student_services.dart';
                                               SizedBox(
                                                 height: 5.h,
                                               ),
-                                              Text('-',
+                                              const Text('-',
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight: FontWeight.bold)),
@@ -353,7 +350,7 @@ import '../../../services/student_services.dart';
                       );
                     },
                   error: (err, stack) => Center(child: Text('$err')),
-                  loading: () => NoticeShimmer(),
+                  loading: () => const NoticeShimmer(),
                 )
 
 

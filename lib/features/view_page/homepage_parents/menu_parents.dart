@@ -1,7 +1,5 @@
 import 'package:eschool/constants/colors.dart';
 import 'package:eschool/features/view_page/homepage_parents/menu_items_parents/assignment_parents/assignment_parents.dart';
-import 'package:eschool/features/view_page/sample_pages/teachers_sample.dart';
-import 'package:eschool/authentication/login_pages/login_page.dart';
 import 'package:eschool/utils/commonWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,13 +13,12 @@ import '../student_page/menu_items/exam/exam_page.dart';
 import '../student_page/menu_items/report_page.dart';
 import '../student_page/menu_items/result/result_page.dart';
 import '../student_page/menu_items/school_calender.dart';
-import '../student_page/menu_items/result/result_page.dart';
 import '../student_page/menu_items/timetable/timetable_page.dart';
 import 'menu_items_parents/fee_page/fee_page.dart';
 
 class MenuParents extends ConsumerWidget {
   final int student_id;
-  MenuParents({required this.student_id});
+  const MenuParents({super.key, required this.student_id});
   @override
   Widget build(BuildContext context,ref) {
     final auth = ref.watch(authProvider);
@@ -37,8 +34,7 @@ class MenuParents extends ConsumerWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: primary,
-                    borderRadius:
-                        BorderRadius.vertical(bottom: Radius.circular(20))),
+                    borderRadius: const BorderRadius.vertical(bottom: Radius.circular(20))),
                 child: Center(
                     child: Text(
                   'Menu',
@@ -49,13 +45,13 @@ class MenuParents extends ConsumerWidget {
                 )),
               ),
               Center(
-                child: Container(
+                child: SizedBox(
                   width: 350.w,
                   height: MediaQuery.of(context).size.height * 4.5 / 6,
                   // color: Colors.red,
                   child: studentClass.when(
-                      data: (student_data){
-                        final data = student_data.firstWhere((element) => element.currentLevel==true);
+                      data: (studentData){
+                        final data = studentData.firstWhere((element) => element.currentLevel==true);
                         return ListView(
                           padding:
                           EdgeInsets.symmetric(vertical: 10.h, horizontal: 0.w),
@@ -119,7 +115,7 @@ class MenuParents extends ConsumerWidget {
                         );
                       },
                       error: (err, stack) => Center(child: Text('$err')),
-                      loading: () => Center(child: CircularProgressIndicator())),
+                      loading: () => const Center(child: CircularProgressIndicator())),
 
                 )
 

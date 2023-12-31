@@ -50,6 +50,9 @@ class Api {
   static const studentAssignmentUrl = '$baseUrl/student_assignment/all/';
   static const delStudentAssignmentUrl = '$baseUrl/student_assignment/';
   static const assignmentStatus = '$baseUrl/assignment_status/all/';
+
+  static const assignmentNotificationStatus = '$baseUrl/assignment_status/';
+
   static const editAssignmentStatus = '$baseUrl/assignment_status/';
 
 
@@ -67,7 +70,13 @@ class Api {
 
   static const delNotices = '$baseUrl/notice/';
   static const subNotices = '$baseUrl/subjectnotice/all/';
+
+  static const subNoticeNotification = '$baseUrl/subjectnotice/';
+
+
   static const editSubNotices = '$baseUrl/subjectnotice/';
+
+
 
   static const eventType = '$baseUrl/eventtype/all/';
   static const subType = '$baseUrl/eventsubtype/1/';

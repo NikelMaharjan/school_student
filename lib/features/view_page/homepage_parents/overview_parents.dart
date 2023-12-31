@@ -19,9 +19,10 @@ import '../../../exceptions/internet_exceptions.dart';
 import '../../services/notification_service.dart';
 import '../../../utils/commonWidgets.dart';
 import '../../services/notice_services.dart';
-import '../student_page/menu_items/notices/notice_page.dart';
 
 class OverviewParents extends ConsumerStatefulWidget {
+  const OverviewParents({super.key});
+
   @override
   ConsumerState<OverviewParents> createState() => _OverviewParentsState();
 }
@@ -43,9 +44,9 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
 
     FirebaseMessaging.instance.getInitialMessage().then(
           (message) {
-        print("FirebaseMessaging.instance.getInitialMessage");
+        //print("FirebaseMessaging.instance.getInitialMessage");
         if (message != null) {
-          print("New Notification");
+         // print("New Notification");
           // if (message.data['_id'] != null) {
           //   Navigator.of(context).push(
           //     MaterialPageRoute(
@@ -63,11 +64,11 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
     // 2. This method only call when App in foreground it mean app must be opened
     FirebaseMessaging.onMessage.listen(
           (message) {
-        print("FirebaseMessaging.onMessage.listen");
+      //  print("FirebaseMessaging.onMessage.listen");
         if (message.notification != null) {
-          print(message.notification!.title);
-          print(message.notification!.body);
-          print("message.data11 ${message.data}");
+          // print(message.notification!.title);
+          // print(message.notification!.body);
+          // print("message.data11 ${message.data}");
           LocalNotificationService.createanddisplaynotification(message);
 
         }
@@ -77,11 +78,11 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
     // 3. This method only call when App in background and not terminated(not closed)
     FirebaseMessaging.onMessageOpenedApp.listen(
           (message) {
-        print("FirebaseMessaging.onMessageOpenedApp.listen");
+   //     print("FirebaseMessaging.onMessageOpenedApp.listen");
         if (message.notification != null) {
-          print(message.notification!.title);
-          print(message.notification!.body);
-          print("message.data22 ${message.data['_id']}");
+     //     print(message.notification!.title);
+       //   print(message.notification!.body);
+       //   print("message.data22 ${message.data['_id']}");
           LocalNotificationService.createanddisplaynotification(message);
         }
       },
@@ -94,7 +95,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
 
   Future<void> getToken()async{
     final response = await FirebaseMessaging.instance.getToken();
-    print(response);
+  //  print(response);
   }
 
   Future<void> checkForUpdate() async {
@@ -110,7 +111,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
         SnackShow.showSuccess(context, 'App is up to date');
       }
     }).catchError((e) {
-      SnackShow.showFailure(context, '${e.toString()}');
+      SnackShow.showFailure(context, e.toString());
     });
   }
 
@@ -120,7 +121,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
         _flexibleUpdateAvailable = true;
       });
     }).catchError((e) {
-      SnackShow.showFailure(context, '${e.toString()}');
+      SnackShow.showFailure(context, e.toString());
     });
   }
 
@@ -142,7 +143,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
           backgroundColor: Colors.white,
           body: Stack(children: [
             SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -157,7 +158,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
                         data: (data){
                           final notice_data = data.where((element) => element.forAllClass == true).toList();
                           return Swiper(
-                            pagination: SwiperPagination(
+                            pagination: const SwiperPagination(
                               alignment: Alignment.bottomCenter,
                             ),
                             autoplay: true,
@@ -178,30 +179,28 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
                                             backgroundColor: Colors.white,
                                             title: Text(
                                               notice_data[index].title,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold,
                                               ),),
-                                            content: Container(
-                                              child:Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Align(
-                                                    alignment: Alignment.topLeft,
-                                                    child: Text(
-                                                      notice_data[index].description,
-                                                      style: TextStyle(color: Colors.black),
-                                                      maxLines: null,
-                                                    ),
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: Text(
+                                                    notice_data[index].description,
+                                                    style: const TextStyle(color: Colors.black),
+                                                    maxLines: null,
                                                   ),
-                                                  SizedBox(height: 5.h,),
-                                                  if(notice_data[index].image!=null)
-                                                    Container(
-                                                      height: MediaQuery.of(context).size.height*0.2,
-                                                      child: Image.network('${Api.basePicUrl}${notice_data[index].image}',fit: BoxFit.contain,),
-                                                    )
-                                                ],
-                                              ),
+                                                ),
+                                                SizedBox(height: 5.h,),
+                                                if(notice_data[index].image!=null)
+                                                  Container(
+                                                    height: MediaQuery.of(context).size.height*0.2,
+                                                    child: Image.network('${Api.basePicUrl}${notice_data[index].image}',fit: BoxFit.contain,),
+                                                  )
+                                              ],
                                             ),
                                             actions: [
                                               Padding(
@@ -235,7 +234,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
                                                 borderRadius: BorderRadius.circular(20),
                                                 child: Image.network('${Api.basePicUrl}${notice_data[index].image}',fit: BoxFit.fitWidth,))) : Container(),
 
-                                        Center(child: Text(notice_data[index].title,style: TextStyle(color: Colors.black),))]),
+                                        Center(child: Text(notice_data[index].title,style: const TextStyle(color: Colors.black),))]),
                                     ),
                                   ),
                                 ),
@@ -244,7 +243,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
                           );
                         },
                         error: (err, stack) => Center(child: Text('$err')),
-                        loading: () => CardShimmer(),
+                        loading: () => const CardShimmer(),
                       )
                   ),
                   SizedBox(
@@ -265,7 +264,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
                       data: (data){
                         return GridView.builder(
                           itemCount: data.length,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                               childAspectRatio: 2.w / 2.h,
@@ -300,7 +299,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
                                               Padding(
                                                 padding: EdgeInsets.only(top: 8.h),
                                                 child: Text(
-                                                  '${data[index].student.studentName}',
+                                                  data[index].student.studentName,
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 15.sp),
@@ -312,7 +311,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
                                   ),
                                 ),
                                 Align(
-                                  alignment: Alignment(-0.15, 0.85),
+                                  alignment: const Alignment(-0.15, 0.85),
                                   child: Card(
                                     elevation: 3,
                                     color: Colors.white,
@@ -337,7 +336,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
                         );
                       },
                       error: (err, stack) => Center(child: Text('$err')),
-                      loading: () => GridShimmer(),
+                      loading: () => const GridShimmer(),
                     ),
                   ),
                   Padding(
@@ -368,7 +367,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
                               .toList();
                           return ListView.builder(
                               padding: EdgeInsets.zero,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: allNotice.length,
                               itemBuilder: (context, index) {
@@ -376,11 +375,11 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
                                     title: allNotice[index].title,
                                     image: allNotice[index].image!=null?'${Api.basePicUrl}${allNotice[index].image}':null,
                                     description: allNotice[index].description,
-                                    createdAt: '${DateFormat('MMMM dd').format(DateTime.parse(allNotice[index].createdAt))}');
+                                    createdAt: DateFormat('MMMM dd').format(DateTime.parse(allNotice[index].createdAt)));
                               });
                         },
                         error: (err, stack) => Center(child: Text('$err')),
-                        loading: () => NoticeShimmer(),
+                        loading: () => const NoticeShimmer(),
                       ),
                     ),
                   ),
@@ -394,7 +393,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
               decoration: BoxDecoration(
                   color: bgColor,
                   borderRadius:
-                      BorderRadius.vertical(bottom: Radius.circular(25))),
+                      const BorderRadius.vertical(bottom: Radius.circular(25))),
               child: Center(
                 child: Padding(
                   padding: EdgeInsets.only(left: 25.w, top: 70.h,right: 15.w),
@@ -439,7 +438,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
                         );
                       },
                       error: (err, stack) => Center(child: Text('$err')),
-                      loading: () => Center(child: CircularShimmer())),
+                      loading: () => const Center(child: CircularShimmer())),
                 ),
               ),
             ),
@@ -448,7 +447,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
               top: 40.h,
               child: IconButton(
                   onPressed: () {
-                    Get.to(() => SettingParents());
+                    Get.to(() => const SettingParents());
                   },
                   icon: Icon(Icons.more_vert_rounded,
                       color: Colors.white, size: 25.sp)),
@@ -468,20 +467,20 @@ Future<bool> _onBackPressed(BuildContext context,ref) async {
         builder: (BuildContext context) {
           return AlertDialog(
             backgroundColor: Colors.white,
-            title: Center(
+            title: const Center(
                 child: Text(
               'Do you want to logout?',
               style: TextStyle(color: Colors.black),
             )),
             actionsAlignment: MainAxisAlignment.center,
             actions: <Widget>[
-              new TextButton(
+              TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: primary,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10))),
-                child: Text("Yes"),
+                child: const Text("Yes"),
                 onPressed: ()  async {
                   await ref.read(authProvider.notifier).userLogout(auth.user!.token);
                   Navigator.pushAndRemoveUntil(
@@ -493,14 +492,14 @@ Future<bool> _onBackPressed(BuildContext context,ref) async {
 
                 },
               ),
-              new TextButton(
+              TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.grey),
+                        side: const BorderSide(color: Colors.grey),
                         borderRadius: BorderRadius.circular(10))),
-                child: Text("No"),
+                child: const Text("No"),
                 onPressed: () => Navigator.pop(context),
               ),
             ],

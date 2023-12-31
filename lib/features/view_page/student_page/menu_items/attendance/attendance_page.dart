@@ -1,16 +1,10 @@
 import 'package:eschool/constants/colors.dart';
-import 'package:eschool/features/view_page/student_page/assignments_tabs/assignment_overview.dart';
-import 'package:eschool/features/view_page/student_page/default_page.dart';
 import 'package:eschool/features/view_page/student_page/menu_items/attendance/attendance_status.dart';
 import 'package:eschool/features/view_page/student_page/menu_items/attendance/leave_note.dart';
-import 'package:eschool/features/view_page/student_page/menu_sheet.dart';
-import 'package:eschool/features/view_page/student_page/overview_page.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:icon_decoration/icon_decoration.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -19,7 +13,7 @@ import '../../../../services/attendance_services.dart';
 class Attendance extends ConsumerStatefulWidget {
 
   final int student_id;
-  Attendance({required this.student_id});
+  const Attendance({super.key, required this.student_id});
 
   @override
   ConsumerState<Attendance> createState() => _AttendanceState();
@@ -50,7 +44,7 @@ class _AttendanceState extends ConsumerState<Attendance> {
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Center(child: Text('Attendance')),
+          title: const Center(child: Text('Attendance')),
           content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.min,
@@ -67,7 +61,7 @@ class _AttendanceState extends ConsumerState<Attendance> {
                     });
                     Navigator.pop(context);
                   },
-                  child: Text('Present',
+                  child: const Text('Present',
                       style: TextStyle(color: Colors.white))),
               TextButton(
                   style: TextButton.styleFrom(backgroundColor: Colors.red),
@@ -78,7 +72,7 @@ class _AttendanceState extends ConsumerState<Attendance> {
                     });
                     Navigator.pop(context);
                   },
-                  child: Text(
+                  child: const Text(
                     'Absent',
                     style: TextStyle(color: Colors.white),
                   )),
@@ -372,7 +366,7 @@ class _AttendanceState extends ConsumerState<Attendance> {
                 Container(
                   width: double.infinity,
                   height: 170.h,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       borderRadius: BorderRadius.vertical(
                         bottom: Radius.circular(40),
                       ),
@@ -468,20 +462,20 @@ class _AttendanceState extends ConsumerState<Attendance> {
                                         top: 10.h,
                                         bottom: 20.h),
                                     titleCentered: true,
-                                    titleTextStyle: TextStyle(
+                                    titleTextStyle: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),
-                                    leftChevronIcon: Icon(
+                                    leftChevronIcon: const Icon(
                                       Icons.arrow_back_ios,
                                       color: Colors.black,
                                     ),
-                                    rightChevronIcon: Icon(
+                                    rightChevronIcon: const Icon(
                                       Icons.arrow_forward_ios,
                                       color: Colors.black,
                                     )),
 
                                 calendarStyle: CalendarStyle(
-                                  defaultTextStyle: TextStyle(color: Colors.black),
+                                  defaultTextStyle: const TextStyle(color: Colors.black),
                                   markerSize: 25.sp,
                                   markerDecoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(100),
@@ -578,7 +572,7 @@ class _AttendanceState extends ConsumerState<Attendance> {
                                     ]));
                           },
                           error: (err, stack) => Center(child: Text('$err')),
-                          loading: () => Center(child: CircularProgressIndicator(),),
+                          loading: () => const Center(child: CircularProgressIndicator(),),
                         ),
 
                         SizedBox(height: 10.h,),
@@ -591,7 +585,7 @@ class _AttendanceState extends ConsumerState<Attendance> {
                               shape: RoundedRectangleBorder(
                                   borderRadius:
                                   BorderRadius.circular(10),
-                                  side: BorderSide(
+                                  side: const BorderSide(
                                     color: Colors.black,
                                   ))),
                           onPressed: () {
@@ -628,7 +622,7 @@ class _AttendanceState extends ConsumerState<Attendance> {
             );
           },
          error: (err, stack) => Container(color: Colors.white,child: Center(child: Text('No Attendance Data',style: TextStyle(color: Colors.black,fontSize: 18.sp),),),),
-         loading: () => Container(color:Colors.white,child: Center(child: CircularProgressIndicator(),)),
+         loading: () => Container(color:Colors.white,child: const Center(child: CircularProgressIndicator(),)),
       ),
     );
 
