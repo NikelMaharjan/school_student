@@ -24,14 +24,14 @@ class StudentProfile extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: bgColor,
-        title: Text("Profile", style: TextStyle(color: Colors.white),),
+        title: const Text("Profile", style: TextStyle(color: Colors.white),),
       ),
       backgroundColor: Colors.white,
       body: infoData.when(
           data: (data){
            final info = data.firstWhere((element) => element.id == student_id);
            return   SingleChildScrollView(
-             physics: BouncingScrollPhysics(),
+             physics: const BouncingScrollPhysics(),
              child: Column(
 
                mainAxisSize: MainAxisSize.min,
@@ -111,7 +111,7 @@ class StudentProfile extends ConsumerWidget {
            );
           },
           error: (err, stack) => Center(child: Text('$err')),
-          loading: () => Center(child: ShimmerListTile())
+          loading: () => const Center(child: ShimmerListTile())
       ),
     );
   }

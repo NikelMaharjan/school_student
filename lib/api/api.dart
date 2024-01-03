@@ -33,6 +33,7 @@ class Api {
 
 
   //static const clasSubjectUrl = '$baseUrl/subject/all/?class_name=';
+
   static const clasSubjectUrl = '$baseUrl/class_subject/all/?class_section=';
 
 

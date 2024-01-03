@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:eschool/features/providers/assignment_providers.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -45,12 +47,16 @@ class _AssignmentDetailsParentsState extends ConsumerState<AssignmentDetailsPare
     setState(() {});
   }
 
+
   Future<void> _redirect(String website) async {
-    final Uri launchUri = Uri(
-      scheme: 'https',
-      path: website,
-    );
-    await launchUrl(launchUri);
+
+    final Uri url = Uri.parse(website);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      throw "Could not launch $url";
+    }
+
   }
 
   @override
@@ -70,96 +76,114 @@ class _AssignmentDetailsParentsState extends ConsumerState<AssignmentDetailsPare
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 20.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    width: MediaQuery.of(context).size.width * 1 / 2,
-                    child: Text(
-                      widget.assignment.title,
-                      style: TextStyle(color: Colors.black, fontSize: 20.sp),
-                    )),
+            DataTable(
+              // datatable widget
+              columns: [
+                // column to set the name
+                const DataColumn(label: Text('Title'),),
+                DataColumn(label: Text(widget.assignment.title),),
+              ],
+
+              rows: [
+                // row to set the values
+                DataRow(
+                    cells: [
+                      const DataCell(Text('Description')),
+                      DataCell(InkWell(
+
+                        onTap: (){
+                          showDialog (
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                shape: const RoundedRectangleBorder(borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                                title: const Text('Description!'),
+                                content: Text(widget.assignment.description),
+                                actions: [
+
+                                  TextButton(
+                                    child: const Text('OK',),
+                                    onPressed: () {
+
+                                      Navigator.of(context).pop();
+
+
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+
+                        child: SizedBox(
+                          width: 180.w,
+                          child: Text(widget.assignment.description, style: TextStyle(
+                              color: bgColor,
+                              decoration: TextDecoration.underline,
+                              fontStyle: FontStyle.italic,
+                              overflow: TextOverflow.ellipsis
+
+                          ),
+                          ),
+                        ),
+                      )),
+                    ]
+                ),
+
+
+                DataRow(
+                    cells: [
+                      const DataCell(Text('Link')),
+                      DataCell(widget.assignment.link != null ? InkWell(
+                          onTap: (){
+                            _redirect(widget.assignment.link!);
+
+                          },
+                          child: SizedBox(
+                            width: 180.w,
+                            child: Text(widget.assignment.link!, style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                color: bgColor,
+                                overflow: TextOverflow.ellipsis,
+
+                                decoration: TextDecoration.underline
+                            ),),
+                          )) : const Text("")),
+                    ]
+                ),
+
+
+                DataRow(
+                    cells: [
+                      const DataCell(Text('Reference')),
+                      DataCell(widget.assignment.imageFile != null ? InkWell(
+                          onTap: (){
+                            showImageViewer(context, CachedNetworkImageProvider('${Api.basePicUrl}${widget.assignment.imageFile}'),
+                                swipeDismissible: false);
+                          },
+                          child: SizedBox(
+                              width: 180.w,
+                              child: Text(widget.assignment.imageFile!, style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  color: bgColor,
+                                  overflow: TextOverflow.ellipsis,
+                                  decoration: TextDecoration.underline),))) : const Text("")),
+                    ]
+                ),
+
+                DataRow(
+                    cells: [
+                      const DataCell(Text('Deadline')),
+                      DataCell(widget.assignment.hasDeadline == true ? Text(DateFormat('MMMM dd').format(DateTime.parse(widget.assignment.deadline!))) : const Text("")),
+                    ]
+                ),
+
               ],
             ),
-            Divider(
-              thickness: 1,
-              color: Colors.black,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Description',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  DateFormat('MMMM dd')
-                      .format(DateTime.parse(widget.assignment.createdAt)),
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15.sp,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5.h,
-            ),
-            Text(
-              widget.assignment.description,
-              style: TextStyle(color: Colors.black),
-            ),
-            SizedBox(
-              height: 5.h,
-            ),
-            widget.assignment.link != null
-                ? ListTile(
-              onTap: () {
-                _redirect(widget.assignment.link!);
-              },
-              contentPadding: EdgeInsets.zero,
-              title: Text(
-                'Link',
-                style: TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(
-                widget.assignment.link!,
-                style: TextStyle(color: Colors.black),
-              ),
-            )
-                : SizedBox(),
-            SizedBox(
-              height: 5.h,
-            ),
-            widget.assignment.imageFile != null
-                ? Container(
-                height: 200.h,
-                width: double.infinity,
-                child: Image.network(
-                  '${Api.basePicUrl}${widget.assignment.imageFile}',
-                  fit: BoxFit.contain,
-                ))
-                : SizedBox(),
-            Divider(
-              thickness: 1,
-              color: Colors.black,
-            ),
-            widget.assignment.hasDeadline == true
-                ? Text(
-              'Deadline: ${DateFormat('MMMM dd').format(DateTime.parse(widget.assignment.deadline!))}',
-              style: TextStyle(color: Colors.black, fontSize: 20.sp),
-            )
-                : Text(''),
-            SizedBox(
-              height: 10.h,
-            ),
+
           ],
         ),
       ),

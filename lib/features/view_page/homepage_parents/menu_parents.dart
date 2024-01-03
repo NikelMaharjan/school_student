@@ -127,7 +127,7 @@ class MenuParents extends ConsumerWidget {
           ),
           Positioned(
             left: 15.w,
-            top: 40.h,
+            top: 50.h,
             child: IconButton(
                 onPressed: () {
                   Get.back();

@@ -28,23 +28,25 @@ class _AssignmentParentsState extends State<AssignmentParents>
                 decoration: BoxDecoration(
                     color: bgColor,
                     borderRadius:
-                    BorderRadius.vertical(bottom: Radius.circular(25))),
+                    const BorderRadius.vertical(bottom: Radius.circular(25))),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp)),
-                        SizedBox(
-                         width: 20.h,
-                        ),
-                      ],
-                    ),
+
+                    const SizedBox(height: 30,),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     IconButton(
+                    //         onPressed: () {
+                    //           Get.back();
+                    //         },
+                    //         icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp)),
+                    //     SizedBox(
+                    //      width: 20.h,
+                    //     ),
+                    //   ],
+                    // ),
                     Text('Assignments',
                         style: TextStyle(color: Colors.white, fontSize: 25.sp)),
                     SizedBox(
@@ -68,15 +70,21 @@ class _AssignmentParentsState extends State<AssignmentParents>
                         indicator: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
-                        tabs: [
-                          Tab(
-                            text: 'Assigned',
+                        tabs: const [
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Tab(
+                              text: 'Assigned',
+                            ),
                           ),
-                          Tab(text: 'Submitted'),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Tab(text: 'Submitted'),
+                          ),
                         ])
                   ],
                 )),
-            Container(
+            SizedBox(
               // color: Colors.red,
                 height: MediaQuery.of(context).size.height * 3.8 / 5,
                 child: Padding(

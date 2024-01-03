@@ -46,7 +46,7 @@ class _AssignmentTabState extends ConsumerState<AssignmentPageParents> with Tick
                 decoration: BoxDecoration(
                     color: bgColor,
                     borderRadius:
-                    BorderRadius.vertical(bottom: Radius.circular(25))),
+                    const BorderRadius.vertical(bottom: Radius.circular(25))),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -60,7 +60,7 @@ class _AssignmentTabState extends ConsumerState<AssignmentPageParents> with Tick
                           onPressed: () {
                             Get.back();
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_back,
                             color: Colors.white,
                           ),
@@ -97,15 +97,21 @@ class _AssignmentTabState extends ConsumerState<AssignmentPageParents> with Tick
                         indicator: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
-                        tabs: [
-                          Tab(
-                            text: 'Task',
+                        tabs: const [
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Tab(
+                              text: 'Task',
+                            ),
                           ),
-                          Tab(text: 'Status'),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Tab(text: 'Status'),
+                          ),
                         ])
                   ],
                 )),
-            Container(
+            SizedBox(
               // color: Colors.red,
                 height: MediaQuery.of(context).size.height * 3.6 / 5,
                 child: Padding(
@@ -114,7 +120,9 @@ class _AssignmentTabState extends ConsumerState<AssignmentPageParents> with Tick
                     // physics: NeverScrollableScrollPhysics(),
 
                     controller: _tabController,
-                    children: [AssignmentDetailsParents(assignment: widget.assignment,student_id: widget.student_id,),AssignmentStatusParents(assignment: widget.assignment, student_id: widget.student_id)],
+                    children: [
+                      AssignmentDetailsParents(assignment: widget.assignment,student_id: widget.student_id,),
+                      AssignmentStatusParents(assignment: widget.assignment, student_id: widget.student_id)],
                     //MyClass(id: class_id, school_id: school_id, class_teacher: class_teacher, teacher_subject: teacher_subject, classSub_id: classSub_id,)
                   ),
                 )),

@@ -73,6 +73,12 @@ class StudentClassService {
 
 
 
+      if(response.statusCode == 204) {
+       throw "Nothing at the moment";
+      }
+
+
+
 
 
 

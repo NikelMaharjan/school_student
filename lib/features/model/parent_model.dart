@@ -5,7 +5,7 @@ class ParentDetail {
   String parentName;
   String currentAddress;
   String permanentAddress;
-  String mobileNo;
+  int  mobileNo;
   String email;
   String picture;
   String gender;
@@ -39,7 +39,7 @@ class ParentDetail {
       permanentAddress: json['permanent_address'],
       mobileNo: json['mobile_no'],
       email: json['email'],
-      picture: json['picture'],
+      picture: json['parent_photo'],
       gender: json['gender'],
       occupation: json['occupation'],
       education: json['education'],

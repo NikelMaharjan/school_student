@@ -42,12 +42,10 @@ class ParentInfoService {
       final response = await dio.get(Api.parentInfo,
           options: Options(
               headers: {HttpHeaders.authorizationHeader: 'token $token'}));
-      final data = (response.data['navigation']['data'] as List)
-          .map((e) => ParentDetail.fromJson(e))
-          .toList();
+      final data = (response.data['navigation']['data'] as List).map((e) => ParentDetail.fromJson(e)).toList();
       print('parent success');
       return data;
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       print(err.response);
       throw Exception('Unable to fetch data');
     }
@@ -58,13 +56,16 @@ class ParentInfoService {
       final response = await dio.get(Api.parentStudentInfo,
           options: Options(
               headers: {HttpHeaders.authorizationHeader: 'token $token'}));
+
+      if(response.statusCode == 204){
+        throw "Nothing at the moment";
+      }
+
       final data = (response.data['navigation']['data'] as List)
           .map((e) => ParentStudent.fromJson(e))
           .toList();
-      print('parent student success');
       return data;
-    } on DioError catch (err) {
-      print(err.response);
+    } on DioException catch (err) {
       throw Exception('Unable to fetch data');
     }
   }

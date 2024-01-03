@@ -14,41 +14,35 @@ import '../../../../../constants/snackshow.dart';
 class FeePage extends ConsumerWidget {
   final int student_id;
   FeePage({required this.student_id});
+
+
+
   @override
   Widget build(BuildContext context,ref) {
+
+    print("NIKEL IS $student_id");
+
     final auth = ref.watch(authProvider);
     final totalFee = ref.watch(totalFeeProvider(student_id));
     final history = ref.watch(studentAllFeePaymentProvider(0));
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: bgColor,
+        title: const Text("Fees", style: TextStyle(color: Colors.white),),
+      ),
       backgroundColor: Colors.white,
       body: Stack(
         children: [
           SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  height: 150.h,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: primary,
-                      borderRadius:
-                      BorderRadius.vertical(bottom: Radius.circular(20))),
-                  child: Center(
-                      child: Text(
-                        'Fees',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30.sp,
-                        ),
-                      )),
-                ),
 
                 totalFee.when(
                     data: (data){
                       return ListView.builder(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemCount: data.length,
                           padding: EdgeInsets.symmetric(horizontal: 15.w),
                           shrinkWrap: true,
@@ -59,7 +53,7 @@ class FeePage extends ConsumerWidget {
                                 onTap: ()=>Get.to(()=>FeeTabs(totalFee: data[index])),
                                   totalFee: data[index].totalFee,
                                   remainingFee: data[index].remainingFee,
-                                  date: '${DateFormat('yyyy-MM-dd').format(data[index].createdAt)}',
+                                  date: DateFormat('yyyy-MM-dd').format(data[index].createdAt),
                                   status: data[index].status
                               ),
                             ],
@@ -68,7 +62,7 @@ class FeePage extends ConsumerWidget {
                       );
                     },
                   error: (err, stack) => Center(child: Text('$err')),
-                  loading: () => NoticeShimmer(),
+                  loading: () => const NoticeShimmer(),
                 ),
 
 
@@ -76,7 +70,10 @@ class FeePage extends ConsumerWidget {
                   height: 15.h,
                 ),
 
-                Text('History',style: TextStyle(color: Colors.black,fontSize: 18.sp),),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('History',style: TextStyle(color: Colors.black,fontSize: 18.sp),),
+                ),
 
                 Divider(
                   thickness: 1,
@@ -84,114 +81,116 @@ class FeePage extends ConsumerWidget {
                   height: 8.h,
                 ),
 
-                history.when(
-                    data: (history_data){
-                      print(student_id);
-                      final data = history_data.where((element) => element.totalFee.student.id==student_id).toList();
-                      return ListView.builder(
-                        itemCount: data.length,
-                          shrinkWrap: true,
-                          padding: EdgeInsets.symmetric(vertical: 5.h),
-                          itemBuilder: (context,index){
-                          return Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.black
-                              )
-                            ),
-                            child: ListTile(
-                              onTap: ()async{
-                                showDialog(
-                                    context: context,
-                                    builder: (context){
-                                      return AlertDialog(
-                                        backgroundColor: Colors.white,
-                                        title: Text('Payment Details',style: TextStyle(color:Colors.black),),
-                                        content: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text('Paid Amount:',style: TextStyle(color: Colors.black),),
-                                                Text('${data[index].paymentAmount}/-',style: TextStyle(color: Colors.black),),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text('Paid Date:',style: TextStyle(color: Colors.black),),
-                                                Text('${DateFormat('yyyy-MM-dd').format(data[index].paymentDate)}',style: TextStyle(color: Colors.black),),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text('Student Name:',style: TextStyle(color: Colors.black),),
-                                                Text(data[index].totalFee.student.studentName,style: TextStyle(color: Colors.black),),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text('Collected by:',style: TextStyle(color: Colors.black),),
-                                                Text('${data[index].collectedBy.employeeName}',style: TextStyle(color: Colors.black),),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 15.h,
-                                            ),
-                                            Text('Remarks',style: TextStyle(color: Colors.black),),
-                                            Divider(
-                                              thickness: 1,
-                                              color: Colors.black,
-                                            ),
-                                            Text(data[index].paymentNote,style: TextStyle(color: Colors.black),)
-                                          ],
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                              style: TextButton.styleFrom(
-                                                  backgroundColor: primary
-                                              ),
-                                              onPressed: (){
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text('Confirm',style: TextStyle(color: Colors.white))
-                                          ),
-                                          TextButton(
-                                              style: TextButton.styleFrom(
-                                                  backgroundColor: abs_color
-                                              ),
-                                              onPressed: (){
-                                                SnackShow.showSuccess(context, 'Please contact via email or phone');
-                                              },
-                                              child: Text('Dispute',style: TextStyle(color: Colors.white),)
-                                          ),
-
-                                        ],
-                                        actionsAlignment: MainAxisAlignment.spaceAround,
-                                      );
-                                    }
-                                );
-                              },
-                              title: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('${data[index].paymentAmount}/-',style: TextStyle(color: Colors.black),),
-                                  Text('${DateFormat('yyyy-MM-dd').format(data[index].paymentDate)}',style: TextStyle(color: Colors.black),),
-                                ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: history.when(
+                      data: (historyData){
+                        final data = historyData.where((element) => element.totalFee.student.id ==student_id).toList();
+                        return ListView.builder(
+                          itemCount: data.length,
+                            shrinkWrap: true,
+                            padding: EdgeInsets.symmetric(vertical: 5.h),
+                            itemBuilder: (context,index){
+                            return Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.black
+                                )
                               ),
-                              subtitle: Text(data[index].paymentNote,style: TextStyle(color: Colors.black),),
-                            ),
-                          );
-                          }
-                      );
-                    },
-                    error: (err,stack)=> Text('No payment history',style: TextStyle(color: Colors.black),),
-                    loading: ()=>NoticeShimmer()
+                              child: ListTile(
+                                onTap: ()async{
+                                  showDialog(
+                                      context: context,
+                                      builder: (context){
+                                        return AlertDialog(
+                                          backgroundColor: Colors.white,
+                                          title: const Text('Payment Details',style: TextStyle(color:Colors.black),),
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  const Text('Paid Amount:',style: TextStyle(color: Colors.black),),
+                                                  Text('${data[index].paymentAmount}/-',style: const TextStyle(color: Colors.black),),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  const Text('Paid Date:',style: TextStyle(color: Colors.black),),
+                                                  Text(DateFormat('yyyy-MM-dd').format(data[index].paymentDate),style: const TextStyle(color: Colors.black),),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  const Text('Student Name:',style: TextStyle(color: Colors.black),),
+                                                  Text(data[index].totalFee.student.studentName,style: const TextStyle(color: Colors.black),),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  const Text('Collected by:',style: TextStyle(color: Colors.black),),
+                                                  Text(data[index].collectedBy.employeeName,style: const TextStyle(color: Colors.black),),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 15.h,
+                                              ),
+                                              const Text('Remarks',style: TextStyle(color: Colors.black),),
+                                              const Divider(
+                                                thickness: 1,
+                                                color: Colors.black,
+                                              ),
+                                              Text(data[index].paymentNote,style: const TextStyle(color: Colors.black),)
+                                            ],
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                                style: TextButton.styleFrom(
+                                                    backgroundColor: primary
+                                                ),
+                                                onPressed: (){
+                                                  Navigator.pop(context);
+                                                },
+                                                child: const Text('Confirm',style: TextStyle(color: Colors.white))
+                                            ),
+                                            TextButton(
+                                                style: TextButton.styleFrom(
+                                                    backgroundColor: abs_color
+                                                ),
+                                                onPressed: (){
+                                                  SnackShow.showSuccess(context, 'Please contact via email or phone');
+                                                },
+                                                child: const Text('Dispute',style: TextStyle(color: Colors.white),)
+                                            ),
+
+                                          ],
+                                          actionsAlignment: MainAxisAlignment.spaceAround,
+                                        );
+                                      }
+                                  );
+                                },
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('${data[index].paymentAmount}/-',style: const TextStyle(color: Colors.black),),
+                                    Text(DateFormat('yyyy-MM-dd').format(data[index].paymentDate),style: const TextStyle(color: Colors.black),),
+                                  ],
+                                ),
+                                subtitle: Text(data[index].paymentNote,style: const TextStyle(color: Colors.black),),
+                              ),
+                            );
+                            }
+                        );
+                      },
+                      error: (err,stack)=>  Text(err.toString(),style: TextStyle(color: Colors.black),),
+                      loading: ()=>const NoticeShimmer()
+                  ),
                 )
 
 
@@ -203,7 +202,7 @@ class FeePage extends ConsumerWidget {
           ),
           Positioned(
             left: 15.w,
-            top: 40.h,
+            top: 45.h,
             child: IconButton(
                 onPressed: () {
                   Get.back();
@@ -218,7 +217,7 @@ class FeePage extends ConsumerWidget {
           ref.refresh(totalFeeProvider(student_id));
         },
         backgroundColor: primary,
-        child: Icon(Icons.refresh,color: Colors.white,),
+        child: const Icon(Icons.refresh,color: Colors.white,),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );

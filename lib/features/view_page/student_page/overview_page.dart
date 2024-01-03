@@ -290,7 +290,8 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
 
 
 //            final classSubject= ref.watch(secWiseSubjectProvider(class_data.className!.sectionName.id));
-            final classSubject= ref.watch(classsSubjectProvider(class_data.className!.id ));
+
+              final classSubject= ref.watch(classsSubjectProvider(class_data.className!.id ));
             return SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Column(

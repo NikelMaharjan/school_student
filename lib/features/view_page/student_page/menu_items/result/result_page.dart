@@ -24,42 +24,13 @@ class ExamResults extends ConsumerWidget {
     final examClass = ref.watch(examClassProvider(class_id));
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: bgColor,
+        title: Text("RESULTS", style: TextStyle(color: Colors.white),),
+      ),
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          Container(
-              height: MediaQuery.of(context).size.height * 0.7/ 5,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  color: bgColor,
-                  borderRadius:
-                  BorderRadius.vertical(bottom: Radius.circular(25))),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    Center(
-                      child: Text('Results',
-                          style: TextStyle(color: Colors.white, fontSize: 25.sp)),
-                    ),])),
-
           examClass.when(
               data: (data){
                 return ListView.builder(

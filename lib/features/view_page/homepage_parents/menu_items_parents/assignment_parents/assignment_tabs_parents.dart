@@ -86,8 +86,11 @@ import '../../../../services/student_services.dart';
                             borderRadius: BorderRadius.circular(10)
                         ),
                         tabs: data.map((item) {
-                          return Tab(
-                            text: item.subject.subjectName,
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Tab(
+                              text: item.subject.subjectName,
+                            ),
                           );
                         }).toList(),
                       ),

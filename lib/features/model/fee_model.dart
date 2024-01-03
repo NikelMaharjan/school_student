@@ -121,7 +121,7 @@ class StudentFeePayment {
   int id;
   EmployeeData2 collectedBy;
   TotalFee totalFee;
-  String paymentAmount;
+  int paymentAmount;
   String paymentNote;
   String paymentMethod;
   DateTime paymentDate;

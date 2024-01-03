@@ -39,8 +39,7 @@ class _NoticeBoard extends ConsumerState<NoticeBoard> with TickerProviderStateMi
     return ConnectivityChecker(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body:
-        Column(
+        body: Column(
           children: [
             Container(
                 height: MediaQuery.of(context).size.height * 1.4 / 5,

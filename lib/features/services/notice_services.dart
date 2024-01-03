@@ -73,17 +73,21 @@ class NoticeService {
 
 
   Future<List<NoticeData>> getNotice() async {
+
     try {
       final response = await dio.get(Api.notices,
           options: Options(
               headers: {HttpHeaders.authorizationHeader: 'token $token'}));
-      final data = (response.data['navigation']['data'] as List)
-          .map((e) => NoticeData.fromJson(e))
-          .toList();
+
+      if(response.statusCode == 204){
+        throw "Nothing at the moment";
+      }
+      final data = (response.data['navigation']['data'] as List).map((e) => NoticeData.fromJson(e)).toList();
+
+
       // print('success');
       return data;
     } on DioException catch (err) {
-      print("ASdkasioasdjkas is ${err.response}");
       throw Exception('Unable to fetch data');
     }
   }

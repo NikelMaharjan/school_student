@@ -75,6 +75,7 @@ class AssignmentItems extends ConsumerWidget {
                                       borderRadius: BorderRadius.circular(10),
                                       color: Colors.red
                                   ),
+                                  child: Center(child: Text("${index + 1}")),
                                 ),
                                 SizedBox(width: 15.w),
                                 Column(

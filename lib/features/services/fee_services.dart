@@ -60,12 +60,21 @@ class TotalFeeServices {
     try {
       final response = await dio.get('${Api.studentTotalFeeUrl}$id',
           options: Options(headers: {HttpHeaders.authorizationHeader: 'token $token'}));
+
+
+      if(response.statusCode == 204){
+
+        return [
+
+        ];
+
+      }
+
       final data = (response.data['navigation']['data'] as List)
           .map((e) => TotalFee.fromJson(e))
           .toList();
-      print('success');
       return data;
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       print(err.response);
       throw Exception('Unable to fetch data');
     }
@@ -82,6 +91,8 @@ class StudentFeeService {
   final dio = Dio();
 
   Future<List<StudentFee>> getStudentFeeInfo() async {
+
+
     try {
       final response = await dio.get('${Api.studentFeeUrl}$id',
           options: Options(headers: {HttpHeaders.authorizationHeader: 'token $token'}));
@@ -122,15 +133,20 @@ class StudentFeePaymentService {
   }
 
   Future<List<StudentFeePayment>> getStudentAllFeePaymentInfo() async {
+
     try {
-      final response = await dio.get('${Api.studentAllFeePaymentUrl}',
+      final response = await dio.get(Api.studentAllFeePaymentUrl,
           options: Options(headers: {HttpHeaders.authorizationHeader: 'token $token'}));
+
+      print("RESPONSE IS $response");
       final data = (response.data['navigation']['data'] as List)
           .map((e) => StudentFeePayment.fromJson(e))
           .toList();
-      print('success');
+      print("DATA IS $data");
+
+
       return data;
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       print(err.response);
       throw Exception('Unable to fetch data');
     }

@@ -37,8 +37,8 @@ class _StudentOverviewState extends ConsumerState<StudentOverview> {
       child: Scaffold(
           backgroundColor: Colors.white,
           body: studentClass.when(
-              data: (student_data){
-                final student = student_data.firstWhere((element) => element.currentLevel==true);
+              data: (studentData){
+                final student = studentData.firstWhere((element) => element.currentLevel==true);
                 print(student.className!.id);
                 final subjects = ref.watch(secWiseSubjectProvider(student.className!.id));
                return Stack(
@@ -80,7 +80,8 @@ class _StudentOverviewState extends ConsumerState<StudentOverview> {
                                   color: Colors.white,
                                   fontSize: 15.sp,
                                 ),
-                              )
+                              ),
+
                             ],
                           ),
                         ),
@@ -91,10 +92,10 @@ class _StudentOverviewState extends ConsumerState<StudentOverview> {
                             width: 350.w,
                             // color: Colors.red,
                             child: subjects.when(
-                data: (subject_data){
+                data: (subjectData){
                   return  GridView.builder(
                     shrinkWrap: true,
-                    itemCount: subject_data.length,
+                    itemCount: subjectData.length,
                     physics: const BouncingScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         childAspectRatio: 2.w / 2.4.h,
@@ -108,11 +109,17 @@ class _StudentOverviewState extends ConsumerState<StudentOverview> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: InkWell(
-                                onTap: () => Get.to(() => Subjects(sec_name: student.className!.sectionName.sectionName, class_level_name: student.className!.className.classLevel.name, class_sec_id: student.className!.id, subject_name: subject_data[index].subject.subjectName, subject_id: subject_data[index].subject.id, teacher_id: subject_data[index].teacher.id, class_Sec_Sub_id: subject_data[index].id)),
+                                onTap: () => Get.to(() => Subjects(sec_name: student.className!.sectionName.sectionName, class_level_name: student.className!.className.classLevel.name, class_sec_id: student.className!.id, subject_name: subjectData[index].subject.subjectName, subject_id: subjectData[index].subject.id, teacher_id: subjectData[index].teacher.id, class_Sec_Sub_id: subjectData[index].id)),
                                 child: Container(
                                     height: 90.h,
                                     width: 90.w,
                                     color: Colors.lightBlueAccent,
+                                  child: Center(child: Text(
+                                      subjectData[index].subject.subjectName.substring(0,1),
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+                                  ),
+
+                                  ),
                                 ),
                               ),
                             ),
@@ -121,7 +128,7 @@ class _StudentOverviewState extends ConsumerState<StudentOverview> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 8.w, vertical: 8.h),
                             child: Text(
-                              subject_data[index].subject.subjectName,
+                              subjectData[index].subject.subjectName,
                               style: const TextStyle(color: Colors.black),
                             ),
                           )
@@ -160,8 +167,8 @@ class _StudentOverviewState extends ConsumerState<StudentOverview> {
                           onPressed: () {
                             Get.to(() => MenuParents(student_id: widget.student_id,));
                           },
-                          icon: Icon(Icons.more_vert_rounded,
-                              color: Colors.white, size: 25.sp)),
+                          icon: Icon(Icons.menu,
+                              color: Colors.red, size: 25.sp)),
                     ),
                   ],
                 );

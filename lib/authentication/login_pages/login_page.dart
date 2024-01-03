@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   void initState() {
     super.initState();
     // Rebuild the screen after 3s which will process the animation from green to blue
-    Future.delayed(Duration(milliseconds: 300)).then((value) => setState(() {
+    Future.delayed(const Duration(milliseconds: 300)).then((value) => setState(() {
       boxX = 0;
       boxY = 1;
     }));
@@ -51,13 +51,13 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
               )
           ),
           AnimatedContainer(
-          duration: Duration(milliseconds: 700) ,
+          duration: const Duration(milliseconds: 700) ,
             alignment: Alignment(boxX, boxY),
             curve: Curves.bounceIn,
             child: Container(
               height: 450.h,
               width: 392.w,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(40))
               ),
@@ -93,29 +93,29 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                       ),
                     ),
                   ),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(vertical: 8.h,horizontal: 8.w),
-                  //   child: TextButton(
-                  //     style: TextButton.styleFrom(
-                  //         backgroundColor: Colors.white,
-                  //         foregroundColor: Colors.black,
-                  //         fixedSize: Size.fromWidth(320.w),
-                  //         shape: RoundedRectangleBorder(
-                  //             borderRadius: BorderRadius.circular(10),
-                  //           side: BorderSide(
-                  //             color: Colors.black,
-                  //           )
-                  //         )
-                  //     ),
-                  //     onPressed: (){
-                  //       Get.to(()=>Parent_login());
-                  //     },
-                  //     child: Padding(
-                  //       padding: EdgeInsets.symmetric(vertical: 8.h,horizontal: 8.w),
-                  //       child: Text('Login as Parent',style: TextStyle(fontSize: 20.sp),),
-                  //     ),
-                  //   ),
-                  // ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.h,horizontal: 8.w),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.black,
+                          fixedSize: Size.fromWidth(320.w),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            side: const BorderSide(
+                              color: Colors.black,
+                            )
+                          )
+                      ),
+                      onPressed: (){
+                        Get.to(()=>Parent_login());
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8.h,horizontal: 8.w),
+                        child: Text('Login as Parent',style: TextStyle(fontSize: 20.sp),),
+                      ),
+                    ),
+                  ),
 
                 ],
               ),

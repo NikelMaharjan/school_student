@@ -505,7 +505,7 @@ class _AttendanceState extends ConsumerState<Attendance> {
 
                             return  Container(
                                 width: 350.w,
-                                height: 180.h,
+                                height: 120.h,
                                 child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -516,7 +516,6 @@ class _AttendanceState extends ConsumerState<Attendance> {
                                               borderRadius: BorderRadius.circular(10),
                                             ),
                                             width: 170.w,
-                                            height: 170.h,
                                             child: Card(
                                               color: pre_color,
                                               elevation: 5,
@@ -532,7 +531,7 @@ class _AttendanceState extends ConsumerState<Attendance> {
                                                           fontWeight: FontWeight.bold)),
                                                   CircleAvatar(
                                                     backgroundColor: Colors.white,
-                                                    radius: 30.sp,
+                                                    radius: 20.sp,
                                                     child: Text('$presentCount'),
                                                   )
                                                 ],
@@ -562,7 +561,7 @@ class _AttendanceState extends ConsumerState<Attendance> {
                                                           fontWeight: FontWeight.bold)),
                                                   CircleAvatar(
                                                     backgroundColor: Colors.white,
-                                                    radius: 30.sp,
+                                                    radius: 20.sp,
                                                     child: Text('$absentCount'),
                                                   )
                                                 ],
@@ -611,7 +610,7 @@ class _AttendanceState extends ConsumerState<Attendance> {
                 ),
                 Positioned(
                   left: 15.w,
-                  top: 40.h,
+                  top: 45.h,
                   child: IconButton(
                       onPressed: () {
                         Get.back();

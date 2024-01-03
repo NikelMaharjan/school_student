@@ -30,7 +30,7 @@ class _FeeTabsState extends State<FeeTabs>
                 decoration: BoxDecoration(
                     color: bgColor,
                     borderRadius:
-                    BorderRadius.vertical(bottom: Radius.circular(25))),
+                    const BorderRadius.vertical(bottom: Radius.circular(25))),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -60,11 +60,17 @@ class _FeeTabsState extends State<FeeTabs>
                         indicator: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
-                        tabs: [
-                          Tab(
-                            text: 'Details',
+                        tabs: const [
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Tab(
+                              text: 'Details',
+                            ),
                           ),
-                          Tab(text: 'History'),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Tab(text: 'History'),
+                          ),
                         ])
                   ],
                 )),

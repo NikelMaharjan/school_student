@@ -105,7 +105,7 @@ class Home extends StatelessWidget {
             useInheritedMediaQuery: true,
             locale: DevicePreview.locale(context),
             theme: ThemeData(
-              appBarTheme: AppBarTheme(
+              appBarTheme: const AppBarTheme(
                 iconTheme: IconThemeData(
                   color: Colors.white
                 )

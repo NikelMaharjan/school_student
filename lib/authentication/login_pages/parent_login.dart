@@ -32,13 +32,13 @@ class _Parent_loginState extends ConsumerState<Parent_login> {
   void initState() {
     super.initState();
     // Rebuild the screen after 3s which will process the animation from green to blue
-    Future.delayed(Duration(milliseconds: 100)).then((value) => setState(() {
+    Future.delayed(const Duration(milliseconds: 100)).then((value) => setState(() {
           boxX = -1;
           boxY = 1;
           boxX1 = 1;
           boxY1 = -1;
         }));
-    Future.delayed(Duration(seconds: 1)).then((value) => setState(() {
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {
           _visible = !_visible;
         }));
   }
@@ -63,7 +63,7 @@ class _Parent_loginState extends ConsumerState<Parent_login> {
         child: Stack(
           children: [
             AnimatedContainer(
-              duration: Duration(milliseconds: 700),
+              duration: const Duration(milliseconds: 700),
               alignment: Alignment(boxX, boxY),
               curve: Curves.bounceIn,
               child: Container(
@@ -77,7 +77,7 @@ class _Parent_loginState extends ConsumerState<Parent_login> {
               ),
             ),
             AnimatedContainer(
-              duration: Duration(milliseconds: 700),
+              duration: const Duration(milliseconds: 700),
               alignment: Alignment(boxX1, boxY1),
               curve: Curves.bounceIn,
               child: Container(
@@ -94,7 +94,7 @@ class _Parent_loginState extends ConsumerState<Parent_login> {
               // If the widget is visible, animate to 0.0 (invisible).
               // If the widget is hidden, animate to 1.0 (fully visible).
               opacity: _visible ? 1.0 : 0.0,
-              duration: Duration(milliseconds: 700),
+              duration: const Duration(milliseconds: 700),
               // The green box must be a child of the AnimatedOpacity widget.
               child: Align(
                 alignment: Alignment.center,
@@ -160,7 +160,7 @@ class _Parent_loginState extends ConsumerState<Parent_login> {
                                               fontSize: 18.sp),
                                           decoration: InputDecoration(
                                               prefixIcon:
-                                              Icon(
+                                              const Icon(
                                                 Icons.person,
                                                 color: Colors.black,
                                               ),
@@ -211,7 +211,7 @@ class _Parent_loginState extends ConsumerState<Parent_login> {
                                                 },
                                               ),
 
-                                              prefixIcon: Icon(
+                                              prefixIcon: const Icon(
                                                 Icons.lock,
                                                 color: Colors.black,
                                               ),
@@ -239,7 +239,7 @@ class _Parent_loginState extends ConsumerState<Parent_login> {
                                           child: Padding(
                                             padding:
                                                 EdgeInsets.only(bottom: 20.h),
-                                            child: Text(
+                                            child: const Text(
                                               'Reset password?',
                                               style:
                                                   TextStyle(color: Colors.blue),
@@ -257,7 +257,7 @@ class _Parent_loginState extends ConsumerState<Parent_login> {
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
-                                                side: BorderSide(
+                                                side: const BorderSide(
                                                   color: Colors.black,
                                                 ))),
                                         onPressed: ()async {
@@ -283,7 +283,7 @@ class _Parent_loginState extends ConsumerState<Parent_login> {
                                             // }
                                           }
                                         },
-                                        child:  auth.isLoad? CircularProgressIndicator():Padding(
+                                        child:  auth.isLoad? const CircularProgressIndicator():Padding(
                                           padding: EdgeInsets.symmetric(
                                               vertical: 5.h, horizontal: 8.w),
                                           child: Text(

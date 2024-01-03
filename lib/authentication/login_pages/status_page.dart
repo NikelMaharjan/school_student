@@ -21,7 +21,7 @@ class StatusPage extends ConsumerWidget {
         return DefaultPage();
       }
       else if(auth.user.userInfo.userType=='Parent'){
-        return OverviewParents();
+        return const OverviewParents();
 
       }
       else{

@@ -116,7 +116,7 @@ class _AssignmentStatusParentsState extends ConsumerState<AssignmentStatusParent
 
                               // launchUrl(url);
                             },
-                            title: Row(
+                            title: const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
@@ -132,9 +132,11 @@ class _AssignmentStatusParentsState extends ConsumerState<AssignmentStatusParent
                           ),
                         ),
 
+                        const SizedBox(height: 10,),
+
                         assignmentStatus.when(
-                            data: (status_data){
-                              final status = status_data.firstWhereOrNull((element) => element.studentAssignment.id == stud_data.id);
+                            data: (statusData){
+                              final status = statusData.firstWhereOrNull((element) => element.studentAssignment.id == stud_data.id);
 
                               if(status == null){
                                 return Container(
@@ -146,7 +148,7 @@ class _AssignmentStatusParentsState extends ConsumerState<AssignmentStatusParent
                                             color: Colors.black
                                         )
                                     ),
-                                    child: ListTile(
+                                    child: const ListTile(
                                         title: Text('Status',style: TextStyle(color: Colors.black),),
                                         trailing:Text('Pending',style: TextStyle(color: Colors.grey),)
                                     )
@@ -167,8 +169,8 @@ class _AssignmentStatusParentsState extends ConsumerState<AssignmentStatusParent
                                             )
                                         ),
                                         child: ListTile(
-                                            title: Text('Status',style: TextStyle(color: Colors.white),),
-                                            trailing:Text(status.status,style: TextStyle(color: Colors.white),)
+                                            title: const Text('Status',style: TextStyle(color: Colors.white),),
+                                            trailing:Text(status.status,style: const TextStyle(color: Colors.white),)
                                         )
                                     ),
                                     NoticeCard(
@@ -186,7 +188,7 @@ class _AssignmentStatusParentsState extends ConsumerState<AssignmentStatusParent
                             loading: () =>
                                 Container(
                                     height:100.h,
-                                    child: ShimmerListTile3())
+                                    child: const ShimmerListTile3())
                         ),
 
 
@@ -209,7 +211,7 @@ class _AssignmentStatusParentsState extends ConsumerState<AssignmentStatusParent
                 loading: () =>
                     Container(
                         height: 100.h,
-                        child: ShimmerListTile3())),
+                        child: const ShimmerListTile3())),
           ),
 
 

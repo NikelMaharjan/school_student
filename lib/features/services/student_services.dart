@@ -122,7 +122,8 @@ class ClasssWiseSubjectService {
   Future<List<UpdatedClass>> getClassWiseSubjectInfo() async {
 
 
-    print("NIkel");
+
+
 
 
 
