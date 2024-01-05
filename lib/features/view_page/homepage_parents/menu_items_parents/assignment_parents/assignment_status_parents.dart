@@ -186,7 +186,7 @@ class _AssignmentStatusParentsState extends ConsumerState<AssignmentStatusParent
                             },
                             error: (err, stack) => Center(child: Text('$err')),
                             loading: () =>
-                                Container(
+                                SizedBox(
                                     height:100.h,
                                     child: const ShimmerListTile3())
                         ),
@@ -198,10 +198,8 @@ class _AssignmentStatusParentsState extends ConsumerState<AssignmentStatusParent
 
                   }
                   else{
-                    return Container(
-                      child: Text(
-                        'No Submission',style: TextStyle(color: Colors.black,fontSize: 15.sp,fontWeight: FontWeight.bold),
-                      ),
+                    return Text(
+                      'No Submission',style: TextStyle(color: Colors.black,fontSize: 15.sp,fontWeight: FontWeight.bold),
                     );
 
                   }
@@ -209,7 +207,7 @@ class _AssignmentStatusParentsState extends ConsumerState<AssignmentStatusParent
                 },
                 error: (err, stack) => Center(child: Text('$err')),
                 loading: () =>
-                    Container(
+                    SizedBox(
                         height: 100.h,
                         child: const ShimmerListTile3())),
           ),

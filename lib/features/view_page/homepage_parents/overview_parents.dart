@@ -5,6 +5,7 @@ import 'package:eschool/features/view_page/homepage_parents/student_overview.dar
 import 'package:eschool/features/view_page/homepage_parents/settings_parents.dart';
 import 'package:eschool/features/view_page/student_page/menu_items/notices/school_notices_tab.dart';
 import 'package:eschool/features/view_page/student_page/menu_items/parent_profile.dart';
+import 'package:eschool/features/view_page/student_page/notification_tabs/notification_page.dart';
 import 'package:eschool/parent_detail.dart';
 import 'package:eschool/parent_notice.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -34,12 +35,17 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
 
   AppUpdateInfo? _updateInfo;
   bool _flexibleUpdateAvailable = false;
+  int? unseen;
+
 
 
 
   @override
   void initState() {
     super.initState();
+    setState(() {
+      unseen = 0;
+    });
    // checkForUpdate();
 
     // 1. This method call when app in terminated state and you get a notification
@@ -134,10 +140,35 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
   @override
   Widget build(BuildContext context) {
 
+
     final auth = ref.watch(authProvider);
     final noticeData = ref.watch(noticeList(auth.user.token));
     final infoData = ref.watch(parentList(auth.user.token));
     final studentList = ref.watch(parentStudentList(auth.user.token));
+
+    final notificationData = ref.watch(notificationProvider2("1"));
+    //print('notification token: $notification_token');
+
+
+    notificationData.when(
+        data: (data) {
+          final unseenNotifications = data.where((notification) => notification.seen == false);
+          final totalUnseenCount = unseenNotifications.length;
+          //print('Total number of unseen notifications: $totalUnseenCount');
+          setState(() {
+            unseen = totalUnseenCount;
+          });
+        },
+        error: (error, stackTrace) {
+          //    print('$error');
+        },
+        loading: () {
+          return;
+        }
+    );
+
+
+
 
     return ConnectivityChecker(
       child: Scaffold(
@@ -345,7 +376,7 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
                   ),
                 ),
 
-                SizedBox(height: 40,),
+                const SizedBox(height: 40,),
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 30.w,
@@ -449,16 +480,44 @@ class _OverviewParentsState extends ConsumerState<OverviewParents> {
               ),
             ),
           ),
-          // Positioned(
-          //   right: 10.w,
-          //   top: 40.h,
-          //   child: IconButton(
-          //       onPressed: () {
-          //         Get.to(() => const SettingParents());
-          //       },
-          //       icon: Icon(Icons.more_vert_rounded,
-          //           color: Colors.white, size: 25.sp)),
-          // ),
+            Positioned(
+              right: 20.w,
+              top: 100.h,
+              child:  Stack(
+                  children: [
+                    InkWell(
+                        onTap: (){
+
+
+
+                       //    Get.to(()=>NotificationPage(notification_token: "1",class_sec_id: class_data.className!.id,student_id: class_data.student.id,));
+                        },
+                        child: Icon(Icons.notifications, size: 25.sp, color: Colors.white)
+                    ),
+
+                      Positioned(
+                          top: 0,
+                          right: 0,
+                          child: Container(
+                            width: 14.w,
+                            height: 14.h,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "$unseen",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),))
+
+                  ]),
+            ),
         ]),
       ),
     );

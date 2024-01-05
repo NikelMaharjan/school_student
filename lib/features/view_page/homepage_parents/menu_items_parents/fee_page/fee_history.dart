@@ -28,15 +28,15 @@ class FeeHistory extends ConsumerWidget {
               itemBuilder: (context,index){
               return FeeCard2(
                   paymentAmount: '${data[index].paymentAmount}',
-                  date: '${DateFormat('yyyy-MM-dd').format(data[index].paymentDate)}',
-                  note: '${data[index].paymentNote}',
-                onTap: ()async{
+                  date: DateFormat('yyyy-MM-dd').format(data[index].paymentDate),
+                  note: data[index].paymentNote,
+                  onTap: ()async{
                     showDialog(
                         context: context,
                         builder: (context){
                           return AlertDialog(
                             backgroundColor: Colors.white,
-                            title: Text('Payment Details',style: TextStyle(color:Colors.black),),
+                            title: const Text('Payment Details',style: TextStyle(color:Colors.black),),
                             content: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,40 +45,40 @@ class FeeHistory extends ConsumerWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('Paid Amount:',style: TextStyle(color: Colors.black),),
-                                    Text('${data[index].paymentAmount}/-',style: TextStyle(color: Colors.black),),
+                                    const Text('Paid Amount:',style: TextStyle(color: Colors.black),),
+                                    Text('${data[index].paymentAmount}/-',style: const TextStyle(color: Colors.black),),
                                   ],
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('Paid Date:',style: TextStyle(color: Colors.black),),
-                                    Text('${DateFormat('yyyy-MM-dd').format(data[index].paymentDate)}',style: TextStyle(color: Colors.black),),
+                                    const Text('Paid Date:',style: TextStyle(color: Colors.black),),
+                                    Text(DateFormat('yyyy-MM-dd').format(data[index].paymentDate),style: const TextStyle(color: Colors.black),),
                                   ],
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('Student Name:',style: TextStyle(color: Colors.black),),
-                                    Text(totalFee.student.studentName,style: TextStyle(color: Colors.black),),
+                                    const Text('Student Name:',style: TextStyle(color: Colors.black),),
+                                    Text(totalFee.student.studentName,style: const TextStyle(color: Colors.black),),
                                   ],
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('Collected by:',style: TextStyle(color: Colors.black),),
-                                    Text('${data[index].collectedBy.employeeName}',style: TextStyle(color: Colors.black),),
+                                    const Text('Collected by:',style: TextStyle(color: Colors.black),),
+                                    Text(data[index].collectedBy.employeeName,style: const TextStyle(color: Colors.black),),
                                   ],
                                 ),
                                 SizedBox(
                                   height: 15.h,
                                 ),
-                                Text('Remarks',style: TextStyle(color: Colors.black),),
-                                Divider(
+                                const Text('Remarks',style: TextStyle(color: Colors.black),),
+                                const Divider(
                                   thickness: 1,
                                   color: Colors.black,
                                 ),
-                                Text(data[index].paymentNote,style: TextStyle(color: Colors.black),)
+                                Text(data[index].paymentNote,style: const TextStyle(color: Colors.black),)
                               ],
                             ),
                             actions: [
@@ -89,7 +89,7 @@ class FeeHistory extends ConsumerWidget {
                                   onPressed: (){
                                     Navigator.pop(context);
                                   },
-                                  child: Text('Confirm',style: TextStyle(color: Colors.white))
+                                  child: const Text('Confirm',style: TextStyle(color: Colors.white))
                               ),
                               TextButton(
                                   style: TextButton.styleFrom(
@@ -98,7 +98,7 @@ class FeeHistory extends ConsumerWidget {
                                   onPressed: (){
                                     SnackShow.showSuccess(context, 'Please contact via email or phone');
                                   },
-                                  child: Text('Dispute',style: TextStyle(color: Colors.white),)
+                                  child: const Text('Dispute',style: TextStyle(color: Colors.white),)
                               ),
 
                             ],
@@ -111,8 +111,8 @@ class FeeHistory extends ConsumerWidget {
               }
           );
         },
-        error: (err,stack)=>Center(child: Text('NO PAYMENT HISTORY',style: TextStyle(color: Colors.black),)),
-        loading: ()=>ShimmerListTile()
+        error: (err,stack)=>const Center(child: Text('NO PAYMENT HISTORY',style: TextStyle(color: Colors.black),)),
+        loading: ()=>const ShimmerListTile()
     );
   }
 }

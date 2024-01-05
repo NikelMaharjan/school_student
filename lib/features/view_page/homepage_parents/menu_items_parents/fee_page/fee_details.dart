@@ -59,91 +59,143 @@ class FeeDetails extends ConsumerWidget {
                 height: 10.h,
               ),
               Text('Details:',style: TextStyle(color: Colors.black,fontSize: 18.sp,fontWeight: FontWeight.bold),),
-              Divider(
+              const Divider(
                 thickness: 1,
 
                 color: Colors.black,
               ),
+
+
+
+
+
+
+
+
+
+
+
+
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.black
                   )
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 8.w,vertical: 8.h),
                 child: Table(
+
+
+
+
 
                   children: [
                     TableRow(
 
-                      decoration: UnderlineTabIndicator(
+
+                      decoration: const UnderlineTabIndicator(
                           borderSide: BorderSide(
                               color: Colors.black
                           )
                       ),
                       children: [
-                        TableCell(child: Text('Description', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
-                        TableCell(child: Text('Amount', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TableCell(child: Text('Description', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TableCell(child: Text('Amount', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
+                        ),
                       ],
                     ),
                     for (var i = 0; i < fee_data.length; i++)
                       TableRow(
-                        decoration: UnderlineTabIndicator(
+                        decoration: const UnderlineTabIndicator(
                             borderSide: BorderSide(
                                 color: Colors.black
                             )
                         ),
                         children: [
-                          TableCell(child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(fee_data[i].feeTitle!,style: TextStyle(color: Colors.black,fontSize: 15.sp),),
-                              SizedBox(height: 5.h,)
-                            ],
-                          )),
-                          TableCell(child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(fee_data[i].feeAmount!,style: TextStyle(color: Colors.black,fontSize: 15.sp),),
-                              SizedBox(height: 5.h,)
-                            ],
-                          )),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TableCell(child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(fee_data[i].feeTitle!,style: TextStyle(color: Colors.black,fontSize: 15.sp),),
+                                SizedBox(height: 5.h,)
+                              ],
+                            )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TableCell(child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(fee_data[i].feeAmount!,style: TextStyle(color: Colors.black,fontSize: 15.sp),),
+                                SizedBox(height: 5.h,)
+                              ],
+                            )),
+                          ),
                         ],
                       ),
 
 
                     TableRow(
-                      decoration: UnderlineTabIndicator(
+                      decoration: const UnderlineTabIndicator(
                           borderSide: BorderSide(
                               color: Colors.black
                           )
                       ),
                       children: [
-                        TableCell(child: Text('Total Amount', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
-                        TableCell(child: Text('${fee_data.map((e) => double.parse(e.feeAmount!)).reduce((a, b) => a + b)}', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TableCell(child: Text('Total Amount', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TableCell(
+                              child: Text(
+                              '${fee_data.map((e) => double.parse(e.feeAmount!)).reduce((a, b) => a + b)}',
+                              style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))
+                          ),
+                        ),
                       ],
                     ),
                     TableRow(
-                      decoration: UnderlineTabIndicator(
+                      decoration: const UnderlineTabIndicator(
                           borderSide: BorderSide(
                               color: Colors.black
                           )
                       ),
                       children: [
-                        TableCell(child: Text('Discount Amount', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
-                        TableCell(child: Text(totalFee.discountProvided==true?'${totalFee.discount}/-':'-', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TableCell(child: Text('Discount Amount', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TableCell(child: Text(totalFee.discountProvided==true?'${totalFee.discount}/-':'-', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
+                        ),
                       ],
                     ),
                     TableRow(
 
                       children: [
-                        TableCell(child: Text('Total Fee', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
-                        TableCell(child: Text('${totalFee.totalFee}/-', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TableCell(child: Text('Total Fee', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TableCell(child: Text('${totalFee.totalFee}/-', style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 15.sp))),
+                        ),
                       ],
                     ),
                   ],
                 ),
               ),
+
+
               // if(totalFee.status != 'Paid')
               // Center(
               //   child: Padding(
@@ -192,7 +244,7 @@ class FeeDetails extends ConsumerWidget {
           );
         },
         error:  (err, stack) => Center(child: Text('$err')),
-        loading: () => Center(child: CircularProgressIndicator())
+        loading: () => const Center(child: CircularProgressIndicator())
     );
   }
 }

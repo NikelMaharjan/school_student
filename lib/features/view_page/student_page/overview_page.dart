@@ -240,26 +240,26 @@ class _OverviewPageState extends ConsumerState<OverviewPage> {
     final noticeData = ref.watch(noticeList(auth.user.token));
     final infoData = ref.watch(studentList(auth.user.token));
     final studentClass = ref.watch(studentClassInfo(auth.user.token));
-    final notificationData = ref.watch(notificationProvider2(notification_token));
-    //print('notification token: $notification_token');
+      final notificationData = ref.watch(notificationProvider2(notification_token));
+      //print('notification token: $notification_token');
 
 
-    notificationData.when(
-        data: (data) {
-          final unseenNotifications = data.where((notification) => notification.seen == false);
-          final totalUnseenCount = unseenNotifications.length;
-          //print('Total number of unseen notifications: $totalUnseenCount');
-          setState(() {
-            unseen = totalUnseenCount;
-          });
-        },
-        error: (error, stackTrace) {
-      //    print('$error');
-        },
-        loading: () {
-          return;
-        }
-    );
+      notificationData.when(
+          data: (data) {
+            final unseenNotifications = data.where((notification) => notification.seen == false);
+            final totalUnseenCount = unseenNotifications.length;
+            //print('Total number of unseen notifications: $totalUnseenCount');
+            setState(() {
+              unseen = totalUnseenCount;
+            });
+          },
+          error: (error, stackTrace) {
+        //    print('$error');
+          },
+          loading: () {
+            return;
+          }
+      );
 
 
 

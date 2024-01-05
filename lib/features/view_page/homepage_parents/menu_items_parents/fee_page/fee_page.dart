@@ -20,7 +20,6 @@ class FeePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context,ref) {
 
-    print("NIKEL IS $student_id");
 
     final auth = ref.watch(authProvider);
     final totalFee = ref.watch(totalFeeProvider(student_id));
@@ -213,8 +212,8 @@ class FeePage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          ref.refresh(studentAllFeePaymentProvider(0));
-          ref.refresh(totalFeeProvider(student_id));
+          ref.invalidate(studentAllFeePaymentProvider(0));
+          ref.invalidate(totalFeeProvider(student_id));
         },
         backgroundColor: primary,
         child: const Icon(Icons.refresh,color: Colors.white,),

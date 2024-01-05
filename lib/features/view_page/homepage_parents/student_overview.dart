@@ -168,7 +168,7 @@ class _StudentOverviewState extends ConsumerState<StudentOverview> {
                             Get.to(() => MenuParents(student_id: widget.student_id,));
                           },
                           icon: Icon(Icons.menu,
-                              color: Colors.red, size: 25.sp)),
+                              color: Colors.white, size: 25.sp)),
                     ),
                   ],
                 );
